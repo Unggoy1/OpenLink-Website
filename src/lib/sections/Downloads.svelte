@@ -43,7 +43,9 @@
 	{/snippet}
 
 	<div class="release">
-		<span class="tag light">Build {release.version}</span>
+		{#if release.version}
+			<span class="tag light">Build {release.version}</span>
+		{/if}
 		{#if release.checksumsUrl}
 			<a href={release.checksumsUrl} class="tag" rel="noopener">SHA-256 checksums</a>
 		{/if}

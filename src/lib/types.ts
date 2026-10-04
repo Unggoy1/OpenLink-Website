@@ -4,7 +4,8 @@ export interface DownloadFile {
 	platform: Platform;
 	label: string;
 	filename: string;
-	url: string;
+	/** Unset while the file isn't published yet. */
+	url?: string;
 }
 
 export interface Program {
@@ -18,7 +19,7 @@ export interface Program {
 }
 
 export interface Release {
-	version: string;
+	version?: string;
 	/** Link to a checksums file for this release, if there is one. */
-	checksumsUrl: string;
+	checksumsUrl?: string;
 }

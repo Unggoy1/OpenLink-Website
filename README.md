@@ -24,11 +24,28 @@ The gate is meant to keep casual visitors out, not to protect secrets. The logic
 
 ## Downloads
 
-Edit `src/lib/server/downloads.ts`: set `release.version`, fill in each file's `url` (and `checksumsUrl` if there is one), then redeploy. A file with an empty `url` shows as "Not available yet". This module is server-only, so the links only reach people past the password.
+During private testing, every download link comes from an environment variable, so no file URLs are ever committed. Set them in Vercel (**Settings → Environment Variables**), then redeploy. Locally, put them in `.env.local`.
+
+| Variable | File |
+|---|---|
+| `RELEASE_VERSION` | Build label shown on the page, e.g. `v0.1.0` |
+| `DOWNLOAD_CHECKSUMS_URL` | SHA-256 checksums file |
+| `DOWNLOAD_APP_WINDOWS` | `OpenLink-windows-amd64.exe` |
+| `DOWNLOAD_CONNECTOR_WINDOWS` | `hi-connector-windows-amd64.exe` |
+| `DOWNLOAD_CONNECTOR_LINUX` | `hi-connector-linux-amd64` |
+| `DOWNLOAD_HOSTAGENT_WINDOWS` | `hi-hostagent-windows-amd64.exe` |
+| `DOWNLOAD_DIRECTORY_WINDOWS` | `hi-directory-windows-amd64.exe` |
+| `DOWNLOAD_DIRECTORY_LINUX` | `hi-directory-linux-amd64` |
+
+- Any download left unset shows "Not available yet".
+- A malformed URL fails the build on purpose, so a typo can't ship; the previous deployment stays live.
+- Links are read on the server only, so they reach visitors only after they pass the password gate.
+
+The program descriptions and filenames live in `src/lib/server/downloads.ts`, and the variables are defined in `src/env.ts`.
 
 ## When the repo goes public
 
-Set `REPO_PUBLIC = true` in `src/lib/site.ts`. GitHub links then appear in the footer, Source, Downloads and the hosting guide. You can also point the download URLs at GitHub Releases.
+Set `REPO_PUBLIC = true` in `src/lib/site.ts`. GitHub links then appear in the footer, Source, Downloads and the hosting guide. The next step is to read download links from the latest GitHub release instead of env vars.
 
 ## Branding
 

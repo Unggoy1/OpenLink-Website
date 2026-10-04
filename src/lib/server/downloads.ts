@@ -1,15 +1,27 @@
-// Download links for the private testing phase, served from the file server.
-// Only people past the password gate receive this data.
+// Download links for the private testing phase.
 //
-// To publish a build: set `version`, fill in each `url`, and redeploy.
-// A file with an empty `url` shows as "Not available yet".
-// Once the repo is public these can point at GitHub Releases instead.
+// URLs, the build version and the checksums link come from environment
+// variables (see src/env.ts and .env.example), so they never land in git.
+// Set them in Vercel and redeploy to publish a new build. A file whose
+// variable is unset shows as "Not available yet".
+//
+// Once the repo is public, these can come from the latest GitHub release instead.
 
+import {
+	DOWNLOAD_APP_WINDOWS,
+	DOWNLOAD_CHECKSUMS_URL,
+	DOWNLOAD_CONNECTOR_LINUX,
+	DOWNLOAD_CONNECTOR_WINDOWS,
+	DOWNLOAD_DIRECTORY_LINUX,
+	DOWNLOAD_DIRECTORY_WINDOWS,
+	DOWNLOAD_HOSTAGENT_WINDOWS,
+	RELEASE_VERSION
+} from '$app/env/private';
 import type { Program, Release } from '#lib/types.ts';
 
 export const release: Release = {
-	version: 'v0.1.0',
-	checksumsUrl: ''
+	version: RELEASE_VERSION,
+	checksumsUrl: DOWNLOAD_CHECKSUMS_URL
 };
 
 export const programs: Program[] = [
@@ -24,7 +36,7 @@ export const programs: Program[] = [
 				platform: 'windows',
 				label: 'Windows x64',
 				filename: 'OpenLink-windows-amd64.exe',
-				url: ''
+				url: DOWNLOAD_APP_WINDOWS
 			}
 		]
 	},
@@ -39,13 +51,13 @@ export const programs: Program[] = [
 				platform: 'windows',
 				label: 'Windows x64',
 				filename: 'hi-connector-windows-amd64.exe',
-				url: ''
+				url: DOWNLOAD_CONNECTOR_WINDOWS
 			},
 			{
 				platform: 'linux',
 				label: 'Linux x64',
 				filename: 'hi-connector-linux-amd64',
-				url: ''
+				url: DOWNLOAD_CONNECTOR_LINUX
 			}
 		]
 	},
@@ -60,7 +72,7 @@ export const programs: Program[] = [
 				platform: 'windows',
 				label: 'Windows x64',
 				filename: 'hi-hostagent-windows-amd64.exe',
-				url: ''
+				url: DOWNLOAD_HOSTAGENT_WINDOWS
 			}
 		]
 	},
@@ -76,13 +88,13 @@ export const programs: Program[] = [
 				platform: 'windows',
 				label: 'Windows x64',
 				filename: 'hi-directory-windows-amd64.exe',
-				url: ''
+				url: DOWNLOAD_DIRECTORY_WINDOWS
 			},
 			{
 				platform: 'linux',
 				label: 'Linux x64',
 				filename: 'hi-directory-linux-amd64',
-				url: ''
+				url: DOWNLOAD_DIRECTORY_LINUX
 			}
 		]
 	}
