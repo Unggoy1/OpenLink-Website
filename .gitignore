@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# SvelteKit / Vite build output
+/.svelte-kit/
+/build/
+/.output/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Vercel (local build output and `vercel link` project settings)
+/.vercel/
+
+# Environment variables (keep the example, never real values like SITE_PASSWORD)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+bun-debug.log*
+
+# Test / coverage output
+/coverage/
+/test-results/
+/playwright-report/
+
+# Editors and OS files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local Claude Code settings
+.claude/
