@@ -31,6 +31,7 @@ During private testing, every download link comes from an environment variable, 
 | `RELEASE_VERSION` | Build label shown on the page, e.g. `v0.1.0` |
 | `DOWNLOAD_CHECKSUMS_URL` | SHA-256 checksums file |
 | `DOWNLOAD_APP_WINDOWS` | `OpenLink-windows-amd64.exe` |
+| `DOWNLOAD_APP_LINUX` | `OpenLink-linux-amd64` |
 | `DOWNLOAD_CONNECTOR_WINDOWS` | `hi-connector-windows-amd64.exe` |
 | `DOWNLOAD_CONNECTOR_LINUX` | `hi-connector-linux-amd64` |
 | `DOWNLOAD_HOSTAGENT_WINDOWS` | `hi-hostagent-windows-amd64.exe` |

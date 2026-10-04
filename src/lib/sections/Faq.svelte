@@ -22,7 +22,7 @@
 		},
 		{
 			q: 'Does it work on Linux?',
-			a: 'Yes, for players. Use the <code>hi-connector</code> command-line client while the game runs under Steam/Proton. A native Linux version of the desktop app is planned. Hosting currently needs Windows.'
+			a: 'Yes, for players. Use the Linux build of the OpenLink app, or the <code>hi-connector</code> command-line client, while the game runs under Steam/Proton. Hosting currently needs Windows.'
 		},
 		{
 			q: 'Who picks the map and mode?',

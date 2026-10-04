@@ -3,8 +3,8 @@
 	import Panel from '#lib/components/Panel.svelte';
 
 	const tabs = [
-		{ id: 'app', label: 'OpenLink app (Windows)' },
-		{ id: 'cli', label: 'hi-connector (Linux & CLI)' }
+		{ id: 'app', label: 'OpenLink app' },
+		{ id: 'cli', label: 'hi-connector (command line)' }
 	] as const;
 
 	let tab = $state<(typeof tabs)[number]['id']>('app');

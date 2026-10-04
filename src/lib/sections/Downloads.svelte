@@ -38,7 +38,7 @@
 
 <Panel id="downloads" title="Downloads">
 	{#snippet intro()}
-		Players need the OpenLink app (or <code>hi-connector</code> on Linux). Hosts need
+		Players need the OpenLink app (or the <code>hi-connector</code> command line). Hosts need
 		<code>hi-hostagent</code>. Everyone needs the same build as the server they’re joining.
 	{/snippet}
 

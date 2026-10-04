@@ -48,6 +48,10 @@ export const variables = defineEnvVars({
 		'DOWNLOAD_APP_WINDOWS',
 		'OpenLink desktop app for Windows (OpenLink-windows-amd64.exe).'
 	),
+	DOWNLOAD_APP_LINUX: download(
+		'DOWNLOAD_APP_LINUX',
+		'OpenLink desktop app for Linux (OpenLink-linux-amd64).'
+	),
 	DOWNLOAD_CONNECTOR_WINDOWS: download(
 		'DOWNLOAD_CONNECTOR_WINDOWS',
 		'hi-connector for Windows (hi-connector-windows-amd64.exe).'

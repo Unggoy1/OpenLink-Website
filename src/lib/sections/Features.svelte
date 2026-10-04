@@ -29,11 +29,11 @@
 			rows: [
 				{
 					title: 'One-click Join',
-					text: 'A desktop server browser for Windows.'
+					text: 'A desktop server browser for Windows and Linux.'
 				},
 				{
 					title: 'Linux via Steam/Proton',
-					text: 'The hi-connector command-line client runs on Windows and Linux.'
+					text: 'The OpenLink app and the hi-connector command-line client both run on Linux.'
 				},
 				{
 					title: 'No port forwarding',

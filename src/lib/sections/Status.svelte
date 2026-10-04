@@ -34,7 +34,6 @@
 			title: 'Planned',
 			items: [
 				'Server-side map/mode playlist rotation',
-				'A native Linux version of the desktop app',
 				'Later: Unggoy integration to build server playlists from community maps'
 			]
 		}

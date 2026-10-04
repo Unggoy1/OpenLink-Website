@@ -8,6 +8,7 @@
 // Once the repo is public, these can come from the latest GitHub release instead.
 
 import {
+	DOWNLOAD_APP_LINUX,
 	DOWNLOAD_APP_WINDOWS,
 	DOWNLOAD_CHECKSUMS_URL,
 	DOWNLOAD_CONNECTOR_LINUX,
@@ -28,7 +29,7 @@ export const programs: Program[] = [
 	{
 		id: 'app',
 		name: 'OpenLink app',
-		audience: 'Players · Windows',
+		audience: 'Players · Windows, Linux',
 		summary:
 			'Desktop server browser. Lists community servers with a Join button and a status bar that goes contacting → ready → playing. Keep it open while you play.',
 		files: [
@@ -37,6 +38,12 @@ export const programs: Program[] = [
 				label: 'Windows x64',
 				filename: 'OpenLink-windows-amd64.exe',
 				url: DOWNLOAD_APP_WINDOWS
+			},
+			{
+				platform: 'linux',
+				label: 'Linux x64',
+				filename: 'OpenLink-linux-amd64',
+				url: DOWNLOAD_APP_LINUX
 			}
 		]
 	},
@@ -45,7 +52,7 @@ export const programs: Program[] = [
 		name: 'hi-connector',
 		audience: 'Players · command line',
 		summary:
-			'The same join logic as the app, on the command line. This is the option for Linux players running the game under Steam/Proton.',
+			'The same join logic as the app, on the command line, for Windows and for Linux players running the game under Steam/Proton.',
 		files: [
 			{
 				platform: 'windows',
