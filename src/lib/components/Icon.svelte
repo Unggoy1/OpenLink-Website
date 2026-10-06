@@ -12,7 +12,8 @@
 		faHouse,
 		faList,
 		faMap,
-		faServer
+		faServer,
+		faTriangleExclamation
 	} from '@fortawesome/free-solid-svg-icons';
 	import { faDiscord, faGithub, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons';
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -29,6 +30,7 @@
 		list: faList,
 		map: faMap,
 		server: faServer,
+		warning: faTriangleExclamation,
 		discord: faDiscord,
 		github: faGithub,
 		linux: faLinux,

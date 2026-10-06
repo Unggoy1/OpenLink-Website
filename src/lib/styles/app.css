@@ -43,6 +43,11 @@
 	--glass-bg-hover: rgba(255, 255, 255, 0.08);
 	--glass-border: rgba(255, 255, 255, 0.1);
 
+	/* Early-development notice */
+	--warning-bg: #3a3220;
+	--warning-border: rgba(240, 196, 92, 0.35);
+	--warning-color: #f3d68f;
+
 	--page-width: 1280px;
 	--header-height: 82px;
 }

@@ -3,6 +3,7 @@
 	import type { LayoutProps } from './$types';
 	import Header from '#lib/components/Header.svelte';
 	import Footer from '#lib/components/Footer.svelte';
+	import DevBanner from '#lib/components/DevBanner.svelte';
 	import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from '#lib/site.ts';
 
 	let { data, children }: LayoutProps = $props();
@@ -22,6 +23,7 @@
 
 <a href="#main" class="skip-link">Skip to content</a>
 <Header />
+<DevBanner />
 
 <main id="main" class="main-container">
 	{@render children()}
