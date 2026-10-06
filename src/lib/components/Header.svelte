@@ -1,54 +1,60 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import Logo from './Logo.svelte';
 	import Icon from './Icon.svelte';
-	import { NAV_LINKS } from '#lib/site.ts';
+	import { NAV_LINKS, type NavLink } from '#lib/site.ts';
 
 	const desktopLinks = NAV_LINKS.filter((link) => link.desktop);
 	const mobileLinks = NAV_LINKS.filter((link) => link.mobileIcon);
 
-	let active = $state('top');
+	const onHome = $derived(page.url.pathname === '/');
+	let section = $state('top');
 
-	// Highlight the section in view, like Unggoy's .is-active sidebar link.
+	function isActive(link: NavLink) {
+		const [path, hash] = link.href.split('#');
+		if (hash) return onHome && section === hash;
+		return page.url.pathname === path || page.url.pathname.startsWith(`${path}/`);
+	}
+
+	// On the home page, highlight the section in view, like Unggoy's .is-active sidebar link.
 	$effect(() => {
-		const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
-			(el): el is HTMLElement => el !== null
-		);
-
+		if (!onHome) return;
+		section = 'top';
 		const observer = new IntersectionObserver(
 			(entries) => {
 				for (const entry of entries) {
-					if (entry.isIntersecting) active = entry.target.id;
+					if (entry.isIntersecting) section = entry.target.id;
 				}
 			},
 			{ rootMargin: '-40% 0px -55% 0px' }
 		);
-
-		sections.forEach((section) => observer.observe(section));
+		document.querySelectorAll('main section[id]').forEach((el) => observer.observe(el));
 		return () => observer.disconnect();
 	});
 </script>
 
 <header class="header">
 	<div class="header-inner">
-		<a href="#top" class="brand" aria-label="OpenLink home">
+		<a href="/#top" class="brand" aria-label="OpenLink home">
 			<!-- Same rendered height as Unggoy's sidebar logo (~48px) -->
 			<Logo height={48} />
 		</a>
 
 		<nav class="top-menu" aria-label="Primary">
-			{#each desktopLinks as link (link.id)}
+			{#each desktopLinks as link (link.href)}
+				{@const active = isActive(link)}
 				<a
-					href="#{link.id}"
+					href={link.href}
 					class="top-link"
-					class:is-active={active === link.id}
-					aria-current={active === link.id ? 'location' : undefined}
+					class:is-active={active}
+					aria-current={active ? (link.href.includes('#') ? 'location' : 'page') : undefined}
 				>
 					{link.label}
 				</a>
 			{/each}
 		</nav>
 
-		<a href="#downloads" class="btn small download">
+		<a href="/#downloads" class="btn small download">
 			<Icon name="download" />
 			Download
 		</a>
@@ -57,12 +63,13 @@
 
 <!-- Unggoy's mobile bottom navigation -->
 <nav class="bottom-nav" aria-label="Sections">
-	{#each mobileLinks as link (link.id)}
+	{#each mobileLinks as link (link.href)}
+		{@const active = isActive(link)}
 		<a
-			href="#{link.id}"
+			href={link.href}
 			class="bottom-nav-link"
-			class:is-active={active === link.id}
-			aria-current={active === link.id ? 'location' : undefined}
+			class:is-active={active}
+			aria-current={active ? (link.href.includes('#') ? 'location' : 'page') : undefined}
 		>
 			{#if link.mobileIcon}
 				<Icon name={link.mobileIcon} size={22} />

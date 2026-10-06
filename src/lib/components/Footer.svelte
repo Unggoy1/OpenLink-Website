@@ -2,12 +2,13 @@
 	import Logo from './Logo.svelte';
 	import Icon from './Icon.svelte';
 	import { DISCORD_URL, REPO_PUBLIC, REPO_URL, UNGGOY_URL } from '#lib/site.ts';
+	import type { Release } from '#lib/types.ts';
 
 	interface Props {
-		version?: string;
+		release: Release | null;
 	}
 
-	let { version }: Props = $props();
+	let { release }: Props = $props();
 </script>
 
 <!-- Laid out like Unggoy's .sidebar-footer: social icons, then small text links -->
@@ -35,11 +36,12 @@
 				</a>
 			</div>
 			<div class="footer-links">
-				{#if version}
-					<span class="footer-link">{version}</span>
+				{#if release}
+					<a href={release.url} class="footer-link" target="_blank" rel="noopener">{release.version}</a>
 				{/if}
-				<a href="#status" class="footer-link">Status</a>
-				<a href="#source" class="footer-link">Source</a>
+				<a href="/host" class="footer-link">Host a server</a>
+				<a href="/about#status" class="footer-link">Status</a>
+				<a href="/about#source" class="footer-link">Source</a>
 				<a href={UNGGOY_URL} class="footer-link" target="_blank" rel="noopener">unggoy.xyz</a>
 			</div>
 		</div>

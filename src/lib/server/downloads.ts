@@ -1,85 +1,80 @@
-// Download links for the private testing phase.
+// The programs offered for download and the release file each button links to.
 //
-// URLs, the build version and the checksums link come from environment
-// variables (see src/env.ts and .env.example), so they never land in git.
-// Set them in Vercel and redeploy to publish a new build. A file whose
-// variable is unset shows as "Not available yet".
-//
-// Once the repo is public, these can come from the latest GitHub release instead.
+// Files come from the newest release on GitHub (see releases.ts), matched by
+// the file names the release workflow publishes. A file missing from that
+// release shows as "Not available yet".
 
-import {
-	DOWNLOAD_APP_LINUX,
-	DOWNLOAD_APP_WINDOWS,
-	DOWNLOAD_CHECKSUMS_URL,
-	DOWNLOAD_DIRECTORY_LINUX,
-	DOWNLOAD_DIRECTORY_WINDOWS,
-	DOWNLOAD_HOSTAGENT_WINDOWS,
-	RELEASE_VERSION
-} from '$app/env/private';
-import type { Program, Release } from '#lib/types.ts';
+import type { Downloads, Program } from '#lib/types.ts';
+import { getLatestRelease } from './releases.ts';
 
-export const release: Release = {
-	version: RELEASE_VERSION,
-	checksumsUrl: DOWNLOAD_CHECKSUMS_URL
+type ProgramDef = Omit<Program, 'files'> & {
+	files: Omit<Program['files'][number], 'url' | 'size'>[];
 };
 
-export const programs: Program[] = [
+const PROGRAMS: ProgramDef[] = [
 	{
 		id: 'app',
-		name: 'OpenLink app',
-		audience: 'Players · Windows, Linux',
+		name: 'OpenLink',
+		audience: 'Players · Windows',
 		summary:
-			'The way to play. Lists community servers, joins them, keeps the game connected while you play, and is where you vote for the next match. Update it when a new version ships.',
+			'The desktop app players use. It lists community servers, joins them with one click, keeps the game connected while you play, and is where you vote for the next match.',
 		files: [
-			{
-				platform: 'windows',
-				label: 'Windows x64',
-				filename: 'OpenLink-windows-amd64.exe',
-				url: DOWNLOAD_APP_WINDOWS
-			},
+			{ platform: 'windows', label: 'Windows x64', filename: 'OpenLink-windows-amd64.exe' },
 			{
 				platform: 'linux',
-				label: 'Linux x64',
-				filename: 'OpenLink-linux-amd64',
-				url: DOWNLOAD_APP_LINUX
+				label: 'Linux x64 (experimental)',
+				filename: 'OpenLink-linux-amd64'
 			}
 		]
 	},
 	{
-		id: 'hostagent',
-		name: 'Host package',
-		audience: 'Server hosts · Windows',
+		id: 'server',
+		name: 'OpenLink Server',
+		audience: 'Hosts · Windows',
 		summary:
-			'hi-hostagent and its helpers in one zip. Runs and supervises the game’s LAN server, lists it in the directory, proxies players, and runs your playlist and voting.',
+			'Everything a host needs in one zip. Runs and supervises the game’s LAN server, lists it in the directory, passes players through to it, and runs your playlist and voting.',
 		files: [
-			{
-				platform: 'windows',
-				label: 'Windows x64',
-				filename: 'OpenLink-host-windows-amd64.zip',
-				url: DOWNLOAD_HOSTAGENT_WINDOWS
-			}
+			{ platform: 'windows', label: 'Windows x64', filename: 'OpenLink-Server-windows-amd64.zip' }
 		]
 	},
 	{
 		id: 'directory',
-		name: 'hi-directory',
+		name: 'OpenLink Directory',
 		audience: 'Directory operators',
 		summary:
-			'The small HTTP service that holds the server list. Most people never need it; we already run the public one.',
-		advanced: true,
+			'The small HTTP service that holds the server list. Most people never need it; we run the public one.',
 		files: [
 			{
 				platform: 'windows',
 				label: 'Windows x64',
-				filename: 'hi-directory-windows-amd64.exe',
-				url: DOWNLOAD_DIRECTORY_WINDOWS
+				filename: 'openlink-directory-windows-amd64.exe'
 			},
-			{
-				platform: 'linux',
-				label: 'Linux x64',
-				filename: 'hi-directory-linux-amd64',
-				url: DOWNLOAD_DIRECTORY_LINUX
-			}
+			{ platform: 'linux', label: 'Linux x64', filename: 'openlink-directory-linux-amd64' }
 		]
 	}
 ];
+
+const CHECKSUMS_FILE = 'SHA256SUMS';
+
+export async function getDownloads(): Promise<Downloads> {
+	const latest = await getLatestRelease();
+	const asset = (name: string) => latest?.assets[name];
+
+	return {
+		release: latest && {
+			version: latest.version,
+			url: latest.url,
+			publishedAt: latest.publishedAt,
+			prerelease: latest.prerelease,
+			checksumsUrl: asset(CHECKSUMS_FILE)?.url
+		},
+		programs: PROGRAMS.map((program) => ({
+			...program,
+			files: program.files.map((file) => ({
+				...file,
+				url: asset(file.filename)?.url,
+				size: asset(file.filename)?.size
+			}))
+		}))
+	};
+}

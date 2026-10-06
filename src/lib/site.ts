@@ -9,17 +9,20 @@ export const SITE_DESCRIPTION =
 /** Public directory API. Not a page: only shown where hosts or players need the address. */
 export const DIRECTORY_URL = 'https://openlink-dir.unggoy.xyz';
 
-export const REPO_URL = 'https://github.com/Unggoy1/OpenLink';
-/** Flip to true once the repository is public; GitHub links then appear across the page. */
-export const REPO_PUBLIC = false;
+export const REPO_SLUG = 'Unggoy1/OpenLink';
+export const REPO_URL = `https://github.com/${REPO_SLUG}`;
+/** Flip to true once the repository is public; GitHub links then appear across the site. */
+export const REPO_PUBLIC = true;
 export const HOSTING_GUIDE_URL = `${REPO_URL}/blob/main/docs/HOSTING.md`;
-export const RELEASES_URL = `${REPO_URL}/releases/latest`;
+export const HOST_CONTROL_URL = `${REPO_URL}/blob/main/docs/HOST-CONTROL.md`;
+// Not /releases/latest: GitHub skips pre-releases there.
+export const RELEASES_URL = `${REPO_URL}/releases`;
 
 export const UNGGOY_URL = 'https://unggoy.xyz';
 export const DISCORD_URL = 'https://discord.gg/xnwFA4z2HA';
 
 export interface NavLink {
-	id: string;
+	href: string;
 	label: string;
 	/** Shown in the top bar on desktop. */
 	desktop?: boolean;
@@ -29,13 +32,11 @@ export interface NavLink {
 	short?: string;
 }
 
+/** Links to "/#id" highlight while that home-page section is in view; others while on that page. */
 export const NAV_LINKS: NavLink[] = [
-	{ id: 'top', label: 'Home', mobileIcon: 'home' },
-	{ id: 'features', label: 'Features', desktop: true },
-	{ id: 'app', label: 'The app', desktop: true },
-	{ id: 'how-it-works', label: 'How it works', desktop: true },
-	{ id: 'play', label: 'Play', desktop: true, mobileIcon: 'gamepad' },
-	{ id: 'host', label: 'Host', desktop: true, mobileIcon: 'server' },
-	{ id: 'downloads', label: 'Downloads', desktop: true, mobileIcon: 'download', short: 'Download' },
-	{ id: 'faq', label: 'FAQ', desktop: true, mobileIcon: 'question' }
+	{ href: '/#downloads', label: 'Downloads', desktop: true, mobileIcon: 'download', short: 'Download' },
+	{ href: '/#play', label: 'Play', desktop: true, mobileIcon: 'gamepad' },
+	{ href: '/#faq', label: 'FAQ', desktop: true, mobileIcon: 'question' },
+	{ href: '/host', label: 'Host a server', desktop: true, mobileIcon: 'server', short: 'Host' },
+	{ href: '/about', label: 'How it works', desktop: true, mobileIcon: 'list', short: 'About' }
 ];

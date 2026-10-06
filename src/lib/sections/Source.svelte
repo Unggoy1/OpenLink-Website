@@ -1,7 +1,14 @@
 <script lang="ts">
-	import Icon from '#lib/components/Icon.svelte';
+	import DownloadButton from '#lib/components/DownloadButton.svelte';
 	import Panel from '#lib/components/Panel.svelte';
 	import { DIRECTORY_URL, REPO_PUBLIC, REPO_URL } from '#lib/site.ts';
+	import type { Program } from '#lib/types.ts';
+
+	interface Props {
+		directory: Program | undefined;
+	}
+
+	let { directory }: Props = $props();
 
 	const repoLabel = REPO_URL.replace('https://', '');
 </script>
@@ -17,7 +24,8 @@
 			</h3>
 			<div class="body">
 				<p>
-					Small, open-source tools. Releases are built by CI and include checksums.
+					OpenLink is open source under the GNU AGPL v3. Releases are built by GitHub Actions and
+					include SHA-256 checksums.
 				</p>
 				{#if REPO_PUBLIC}
 					<a href={REPO_URL} class="btn small" target="_blank" rel="noopener">
@@ -29,20 +37,21 @@
 			</div>
 		</article>
 
-		<article class="details">
-			<h3 class="details-header">
-				Run your own directory
-			</h3>
+		<article class="details" id="directory">
+			<h3 class="details-header">Run your own directory</h3>
 			<div class="body">
 				<p>
-					<code>hi-directory</code> is a small HTTP service that holds the server list. Hosts
-					register and send heartbeats; players list servers. Most people never need it: we run the
-					public one at <code>{new URL(DIRECTORY_URL).host}</code>.
+					OpenLink Directory is a small HTTP service that holds the server list. Hosts register and
+					send heartbeats; players list servers. Most people never need it: we run the public one at
+					<code>{new URL(DIRECTORY_URL).host}</code>.
 				</p>
-				<a href="#downloads" class="btn small">
-					<Icon name="download" />
-					Get hi-directory
-				</a>
+				{#if directory}
+					<div class="files">
+						{#each directory.files as file (file.filename)}
+							<DownloadButton {file} />
+						{/each}
+					</div>
+				{/if}
 			</div>
 		</article>
 	</div>
@@ -51,7 +60,7 @@
 <style>
 	.cards {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 16px;
 		align-items: start;
 	}
@@ -79,6 +88,13 @@
 		opacity: 0.9;
 	}
 
+	.files {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		align-self: stretch;
+	}
+
 	.body code {
 		white-space: normal;
 		overflow-wrap: anywhere;
@@ -86,7 +102,7 @@
 
 	@media (max-width: 900px) {
 		.cards {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
 		}
 	}
 </style>

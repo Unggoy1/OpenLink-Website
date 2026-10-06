@@ -6,23 +6,23 @@
 	const faqs = [
 		{
 			q: 'Is this safe for my account?',
-			a: 'You sign in to the game normally, and OpenLink never handles your Xbox or Microsoft credentials. Players’ games are never modified and OpenLink doesn’t interact with anti-cheat; players only use the game’s own LAN server mode. It is still an unofficial tool, so play at your own discretion.'
+			a: 'You sign in to the game normally, and OpenLink never handles your Xbox or Microsoft credentials. Players’ games are never modified and OpenLink doesn’t interact with anti-cheat; it only uses the game’s own LAN server mode. It is still an unofficial tool, so play at your own discretion.'
 		},
 		{
 			q: 'Do I need to port forward to play?',
-			a: 'No. Only hosts need to forward UDP 1343 (or use a UDP tunnel). Players just run the OpenLink app and join.'
+			a: 'No. Only hosts forward a port. Players just run the OpenLink app and join.'
 		},
 		{
 			q: 'Why can’t I join a server?',
-			a: 'Usually one of two reasons. The server is on a different game version (it is still listed but can’t be joined), or the server is currently unreachable. The app warns you if a server stops advertising or the directory can’t be reached.'
+			a: 'Usually the server is on a different game version (it is still listed but can’t be joined), or it is currently unreachable. The app warns you if a server stops answering or the directory can’t be reached. If you joined but the server isn’t in the game’s list, switch the app to <strong>LAN broadcast</strong> in Settings.'
 		},
 		{
 			q: 'Which version of the game do I need?',
-			a: 'Halo Infinite on Steam, at the same version as the server. Every game update means hosts and players need to update together.'
+			a: 'Halo Infinite on Steam, at the same version as the server. After a game update, hosts and players update together.'
 		},
 		{
 			q: 'Who picks the map and mode?',
-			a: 'It depends on the server. With a playlist, the server picks every match, not a player. With voting on, a vote opens in the OpenLink app when you join and after every match: click a card to vote, and the most votes wins (a tie, or no votes, is settled at random). On a server without a playlist, the first player to join leads the lobby and picks.'
+			a: 'The server, from its playlist; never a player. On servers with voting, a vote opens in the OpenLink app when you join and after every match: click a card to vote, and the most votes wins (a tie, or no votes, is settled at random).'
 		},
 		{
 			q: 'I’m in the game. How do I know a vote has started?',
@@ -34,15 +34,15 @@
 		},
 		{
 			q: 'Does it work on Linux?',
-			a: 'Yes, for players. Use the Linux build of the OpenLink app while the game runs under Steam/Proton. Hosting currently needs Windows.'
+			a: 'There is a Linux build of the OpenLink app for playing under Steam/Proton, but it hasn’t been tested yet. Hosting needs Windows.'
 		},
 		{
 			q: 'Can I host and play on the same PC?',
-			a: 'Yes. Set the app to <strong>LAN broadcast</strong> in Settings. Otherwise the game won’t see the server through the app, because the server itself occupies the LAN discovery port.'
+			a: 'Yes. The app switches to <strong>LAN broadcast</strong> by itself when the server runs on your PC, because the server occupies the LAN discovery port. If the game doesn’t see your server, check that setting.'
 		},
 		{
 			q: 'Does hosting modify the game?',
-			a: 'Only on the host’s side. To control maps and modes, the host package loads a small DLL into the host’s own server process. It never touches players’ games or anti-cheat. Hosts run it at their own risk with respect to the game’s terms of service.'
+			a: 'Only on the host’s side. To control maps and modes, OpenLink Server loads a small DLL into the host’s own server process. It never touches players’ games or anti-cheat. Hosts run it at their own risk with respect to the game’s terms of service. More in the <a href="/host" class="text-link">hosting guide</a>.'
 		}
 	];
 </script>

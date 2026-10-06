@@ -1,8 +1,8 @@
 # OpenLink site
 
-Landing page for OpenLink, served at `openlink.unggoy.xyz`. Built with SvelteKit 3 and Svelte 5, using Bun for tooling, and deployed to Vercel.
+Website for OpenLink, served at `openlink.unggoy.xyz`. Built with SvelteKit 3 and Svelte 5, using Bun for tooling, and deployed to Vercel.
 
-The visual design follows [unggoy-frontend](https://github.com/Unggoy1): the same CSS tokens, Inter, Font Awesome 6 icons, welcome banner, sidebar-style nav pills, mobile bottom nav, `.assets-container` panels, "details" cards, tags and chips.
+The visual design follows [unggoy-frontend](https://github.com/Unggoy1): the same CSS tokens, Inter, Font Awesome 6 icons, welcome banner, nav pills, mobile bottom nav, `.assets-container` panels, "details" cards, tags and chips.
 
 ## Develop
 
@@ -12,39 +12,27 @@ bun run dev
 bun run check
 ```
 
-## Password gate
+## Pages
 
-The whole site sits behind one shared password while the project is private.
+| Route | Content | Sections |
+|---|---|---|
+| `/` | For players: downloads, how to play, the app and voting, FAQ | `src/routes/+page.svelte` |
+| `/host` | Hosting guide: setup steps, options, admin commands, caveats, playlist format | `src/routes/host/+page.svelte` |
+| `/about` | How it works, status, source, running your own directory | `src/routes/about/+page.svelte` |
 
-- Set `SITE_PASSWORD` in the Vercel project's environment variables. For local dev, put it in `.env.local`, which is gitignored.
-- Visitors get a 30-day cookie. Changing the password signs everyone out.
-- **Going public:** delete `SITE_PASSWORD`. The gate turns off and `robots.txt` allows indexing again.
-
-The gate is meant to keep casual visitors out, not to protect secrets. The logic lives in `src/hooks.server.ts` and `src/lib/server/gate.ts`.
+Sections live in `src/lib/sections/`; nav links are `NAV_LINKS` in `src/lib/site.ts`.
 
 ## Downloads
 
-During private testing, every download link comes from an environment variable, so no file URLs are ever committed. Set them in Vercel (**Settings → Environment Variables**), then redeploy. Locally, put them in `.env.local`.
+Download links, file sizes and the build version come from the newest published release of [Unggoy1/OpenLink](https://github.com/Unggoy1/OpenLink/releases), pre-releases included. Publishing a release is all it takes; the site picks it up within a few minutes.
 
-| Variable | File |
-|---|---|
-| `RELEASE_VERSION` | Build label shown on the page, e.g. `v0.1.0` |
-| `DOWNLOAD_CHECKSUMS_URL` | SHA-256 checksums file |
-| `DOWNLOAD_APP_WINDOWS` | `OpenLink-windows-amd64.exe` |
-| `DOWNLOAD_APP_LINUX` | `OpenLink-linux-amd64` |
-| `DOWNLOAD_HOSTAGENT_WINDOWS` | `OpenLink-host-windows-amd64.zip` (host package) |
-| `DOWNLOAD_DIRECTORY_WINDOWS` | `hi-directory-windows-amd64.exe` |
-| `DOWNLOAD_DIRECTORY_LINUX` | `hi-directory-linux-amd64` |
+- Buttons are matched to release files by name (`src/lib/server/downloads.ts`), so they must match the names the release workflow publishes. A file missing from the release shows "Not available yet".
+- `src/lib/server/releases.ts` asks the GitHub API and keeps the answer in memory for 5 minutes, re-checking with an ETag. Pages also send `s-maxage=300, stale-while-revalidate=3600`, so Vercel's CDN serves most visits without asking GitHub at all.
+- If GitHub can't be reached, the last good answer is reused; with none, the page says it couldn't load the release and links to the releases page.
 
-- Any download left unset shows "Not available yet".
-- A malformed URL fails the build on purpose, so a typo can't ship; the previous deployment stays live.
-- Links are read on the server only, so they reach visitors only after they pass the password gate.
+### `GITHUB_TOKEN` (optional, recommended)
 
-The program descriptions and filenames live in `src/lib/server/downloads.ts`, and the variables are defined in `src/env.ts`.
-
-## When the repo goes public
-
-Set `REPO_PUBLIC = true` in `src/lib/site.ts`. GitHub links then appear in the footer, Source, Downloads and the hosting guide. The next step is to read download links from the latest GitHub release instead of env vars.
+Without a token, GitHub allows 60 API requests an hour per IP address, and Vercel shares outgoing addresses between projects. Set `GITHUB_TOKEN` in Vercel (**Settings → Environment Variables**) to a fine-grained token with read-only access to public repositories; no extra permissions are needed. Locally, put it in `.env.local` (see `.env.example`).
 
 ## Branding
 

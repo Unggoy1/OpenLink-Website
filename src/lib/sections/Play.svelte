@@ -1,86 +1,83 @@
 <script lang="ts">
 	import Panel from '#lib/components/Panel.svelte';
+
+	interface Step {
+		title: string;
+		text: string;
+	}
+
+	// Trusted static copy; may contain inline HTML.
+	const steps: Step[] = [
+		{
+			title: 'Install Halo Infinite on Steam',
+			text: 'On the same game version as the server.'
+		},
+		{
+			title: 'Download and open the OpenLink app',
+			text: 'Get it from <a href="#downloads" class="text-link">Downloads</a>. It tells you when a newer version is out.'
+		},
+		{
+			title: 'Click Join on a server',
+			text: 'The status bar goes contacting → ready → playing.'
+		},
+		{
+			title: 'Pick the server in Halo Infinite',
+			text: 'Go to <strong>Custom Game → Create Match → Server</strong> and pick it by name.'
+		},
+		{
+			title: 'Keep OpenLink open while you play',
+			text: 'Closing it disconnects you. On servers with voting, it chimes when a vote opens; alt-tab to it to pick the next match.'
+		}
+	];
+
+	const notes: Step[] = [
+		{
+			title: 'No port forwarding',
+			text: 'Only hosts need to open a port.'
+		},
+		{
+			title: 'Versions must match',
+			text: 'Servers on another game version are listed but can’t be joined.'
+		},
+		{
+			title: 'Keep the app updated',
+			text: 'Update when a new version ships; the app tells you.'
+		},
+		{
+			title: 'Not showing up in game?',
+			text: 'Switch the app to <strong>LAN broadcast</strong> in Settings. It does this by itself when the server runs on your own PC.'
+		}
+	];
 </script>
 
 <Panel id="play" title="How to play">
 	{#snippet intro()}
-		No port forwarding and no config files. You need the Steam version of the game, on the same
-		version as the server, and the OpenLink app.
+		No port forwarding and no config files: just the Steam version of the game and the OpenLink app.
 	{/snippet}
 
 	<div class="layout">
 		<ol class="steps">
-			<li>
-				<span class="num">1</span>
-				<div>
-					<h3>Install Halo Infinite on Steam</h3>
-					<p>You need the same game version as the server. On Linux, run it through Steam/Proton.</p>
-				</div>
-			</li>
-			<li>
-				<span class="num">2</span>
-				<div>
-					<h3>Download and open the OpenLink app</h3>
-					<p>
-						Get it from <a href="#downloads" class="text-link">Downloads</a>. Enter your settings
-						once; the app tells you when a newer release is out.
-					</p>
-				</div>
-			</li>
-			<li>
-				<span class="num">3</span>
-				<div>
-					<h3>Click Join on a server</h3>
-					<p>The status bar goes contacting → ready → playing.</p>
-				</div>
-			</li>
-			<li>
-				<span class="num">4</span>
-				<div>
-					<h3>Pick the host’s PC in Halo Infinite</h3>
-					<p>Go to <strong>Custom Games → Server</strong> and pick the host’s PC name.</p>
-				</div>
-			</li>
-			<li>
-				<span class="num">5</span>
-				<div>
-					<h3>Keep OpenLink open while you play</h3>
-					<p>
-						Closing it disconnects you. On servers with voting, it chimes when a vote opens; alt-tab
-						to it to pick the next match.
-					</p>
-				</div>
-			</li>
+			{#each steps as step, i (step.title)}
+				<li>
+					<span class="num">{i + 1}</span>
+					<div>
+						<h3>{step.title}</h3>
+						<p>{@html step.text}</p>
+					</div>
+				</li>
+			{/each}
 		</ol>
 
 		<aside class="details">
 			<h3 class="details-header">Good to know</h3>
-			<div class="details-row">
-				<div>
-					Keep the app updated
-					<small>Update when a new version ships. Servers with voting need the latest app.</small>
+			{#each notes as note (note.title)}
+				<div class="details-row">
+					<div>
+						{note.title}
+						<small>{@html note.text}</small>
+					</div>
 				</div>
-			</div>
-			<div class="details-row">
-				<div>
-					Hosting on the same PC?
-					<small
-						>Set the app to <strong>LAN broadcast</strong> in Settings, or the game won’t see your server.</small
-					>
-				</div>
-			</div>
-			<div class="details-row">
-				<div>
-					No port forwarding
-					<small>Only hosts need to open a port.</small>
-				</div>
-			</div>
-			<div class="details-row">
-				<div>
-					Versions must match
-					<small>Servers on another game version are listed but can’t be joined.</small>
-				</div>
-			</div>
+			{/each}
 		</aside>
 	</div>
 </Panel>
@@ -136,7 +133,7 @@
 		opacity: 0.85;
 	}
 
-	strong {
+	.layout :global(strong) {
 		font-weight: 600;
 	}
 

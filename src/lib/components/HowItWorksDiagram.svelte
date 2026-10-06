@@ -12,7 +12,7 @@
 
 	const host: Node = {
 		role: 'Host',
-		name: 'hi-hostagent',
+		name: 'OpenLink Server',
 		detail: 'Runs the game’s LAN server and sends its beacon to the directory.',
 		icon: 'server'
 	};

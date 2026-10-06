@@ -17,12 +17,12 @@
 			text: 'Filter by region, favourites and game version.'
 		},
 		{
-			title: 'Stays up to date',
-			text: 'Tells you when a newer release is out.'
+			title: 'Ping and player counts',
+			text: 'See how full a server is and how far away, before you join.'
 		},
 		{
-			title: 'Hosting and playing?',
-			text: 'LAN broadcast mode for hosts who play on the same PC.'
+			title: 'Stays up to date',
+			text: 'Tells you when a newer version is out.'
 		}
 	];
 
@@ -52,7 +52,7 @@
 
 <Panel id="app" title="The OpenLink app">
 	{#snippet intro()}
-		A desktop server browser for Windows and Linux. It lists community servers, joins them, keeps the
+		A desktop server browser for Windows. It lists community servers, joins them, keeps the
 		game connected while you play, and on servers with voting, lets you pick the next match.
 	{/snippet}
 

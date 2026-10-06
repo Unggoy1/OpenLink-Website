@@ -18,7 +18,7 @@
 			<div>
 				<h3>Host</h3>
 				<p>
-					<code>hi-hostagent</code> runs the game’s LAN server and sends its beacon to the directory,
+					OpenLink Server runs the game’s LAN server and sends its beacon to the directory,
 					with a heartbeat to keep the listing fresh.
 				</p>
 			</div>

@@ -12,15 +12,18 @@
 		<p class="welcome-tagline">Dedicated servers for Halo Infinite</p>
 		<p class="welcome-description">
 			Run your own Halo Infinite server, list it in a community directory, and let players anywhere
-			join it. OpenLink uses the game’s own built-in LAN server mode, and players’ games are never
+			join it with one click. Built on the game’s own LAN server mode; players’ games are never
 			modified.
 		</p>
 		<div class="ctas">
 			<a href="#downloads" class="btn light">
 				<Icon name="download" />
-				Download
+				Download OpenLink
 			</a>
-			<a href="#how-it-works" class="btn">How it works</a>
+			<a href="/host" class="btn">
+				<Icon name="server" />
+				Host a server
+			</a>
 		</div>
 	</div>
 </section>

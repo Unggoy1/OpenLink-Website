@@ -11,14 +11,15 @@
 			title: 'Tested',
 			items: [
 				'Remote players on Windows and Linux/Proton found a hosted server and played several full matches in a row.',
-				'That was one test with a small group, and the host was exposed through a tunnel rather than a router port forward.'
+				'That was one test with a small group, and the host was reached through a tunnel rather than a router port forward.'
 			]
 		},
 		{
 			title: 'Not yet tested',
 			items: [
 				'A host using a direct router port forward',
-				'Proxy mode, bans and several servers on one PC with the real game',
+				'The Linux build of the OpenLink app',
+				'Several servers on one PC',
 				'Many players at once',
 				'Long uptime'
 			]
@@ -26,9 +27,9 @@
 		{
 			title: 'Limitations',
 			items: [
-				'Every game update requires hosts and players to update together.',
-				'Map and mode control supports one game build at a time. After a Halo update, it waits for an OpenLink update.',
-				'Servers with voting need the latest OpenLink app.'
+				'After every game update, hosts and players update together.',
+				'Each OpenLink Server release supports one game build. After a Halo update, hosting waits for an OpenLink update.',
+				'Hosting needs Windows.'
 			]
 		},
 		{

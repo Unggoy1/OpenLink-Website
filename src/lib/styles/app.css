@@ -136,9 +136,18 @@ code {
 	padding: 0 24px 24px;
 }
 
+/* Space under the header, the same as the home page's hero banner. */
+.main-container > :first-child {
+	margin-top: 24px;
+}
+
 @media screen and (max-width: 769px) {
 	.main-container {
 		padding: 0 16px;
+	}
+
+	.main-container > :first-child {
+		margin-top: 16px;
 	}
 }
 
