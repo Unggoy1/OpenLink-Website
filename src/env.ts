@@ -52,17 +52,9 @@ export const variables = defineEnvVars({
 		'DOWNLOAD_APP_LINUX',
 		'OpenLink desktop app for Linux (OpenLink-linux-amd64).'
 	),
-	DOWNLOAD_CONNECTOR_WINDOWS: download(
-		'DOWNLOAD_CONNECTOR_WINDOWS',
-		'hi-connector for Windows (hi-connector-windows-amd64.exe).'
-	),
-	DOWNLOAD_CONNECTOR_LINUX: download(
-		'DOWNLOAD_CONNECTOR_LINUX',
-		'hi-connector for Linux (hi-connector-linux-amd64).'
-	),
 	DOWNLOAD_HOSTAGENT_WINDOWS: download(
 		'DOWNLOAD_HOSTAGENT_WINDOWS',
-		'hi-hostagent for Windows (hi-hostagent-windows-amd64.exe).'
+		'Host package for Windows (OpenLink-host-windows-amd64.zip).'
 	),
 	DOWNLOAD_DIRECTORY_WINDOWS: download(
 		'DOWNLOAD_DIRECTORY_WINDOWS',

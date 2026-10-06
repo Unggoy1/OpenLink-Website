@@ -38,8 +38,8 @@
 
 <Panel id="downloads" title="Downloads">
 	{#snippet intro()}
-		Players need the OpenLink app (or the <code>hi-connector</code> command line). Hosts need
-		<code>hi-hostagent</code>. Everyone needs the same build as the server they’re joining.
+		Players need the OpenLink app. Hosts need the host package. Everyone needs the same game build
+		as the server they’re joining.
 	{/snippet}
 
 	<div class="release">
@@ -104,7 +104,7 @@
 
 	.programs {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 		gap: 16px;
 	}
 

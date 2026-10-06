@@ -4,6 +4,7 @@
 	import Footer from '#lib/components/Footer.svelte';
 	import Hero from '#lib/sections/Hero.svelte';
 	import Features from '#lib/sections/Features.svelte';
+	import App from '#lib/sections/App.svelte';
 	import HowItWorks from '#lib/sections/HowItWorks.svelte';
 	import Play from '#lib/sections/Play.svelte';
 	import Host from '#lib/sections/Host.svelte';
@@ -26,6 +27,7 @@
 <main id="main" class="main-container">
 	<Hero />
 	<Features />
+	<App />
 	<HowItWorks />
 	<Play />
 	<Host />

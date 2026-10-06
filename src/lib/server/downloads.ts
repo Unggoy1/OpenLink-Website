@@ -11,8 +11,6 @@ import {
 	DOWNLOAD_APP_LINUX,
 	DOWNLOAD_APP_WINDOWS,
 	DOWNLOAD_CHECKSUMS_URL,
-	DOWNLOAD_CONNECTOR_LINUX,
-	DOWNLOAD_CONNECTOR_WINDOWS,
 	DOWNLOAD_DIRECTORY_LINUX,
 	DOWNLOAD_DIRECTORY_WINDOWS,
 	DOWNLOAD_HOSTAGENT_WINDOWS,
@@ -31,7 +29,7 @@ export const programs: Program[] = [
 		name: 'OpenLink app',
 		audience: 'Players · Windows, Linux',
 		summary:
-			'Desktop server browser. Lists community servers with a Join button and a status bar that goes contacting → ready → playing. Keep it open while you play.',
+			'The way to play. Lists community servers, joins them, keeps the game connected while you play, and is where you vote for the next match. Update it when a new version ships.',
 		files: [
 			{
 				platform: 'windows',
@@ -48,37 +46,16 @@ export const programs: Program[] = [
 		]
 	},
 	{
-		id: 'connector',
-		name: 'hi-connector',
-		audience: 'Players · command line',
-		summary:
-			'The same join logic as the app, on the command line, for Windows and for Linux players running the game under Steam/Proton.',
-		files: [
-			{
-				platform: 'windows',
-				label: 'Windows x64',
-				filename: 'hi-connector-windows-amd64.exe',
-				url: DOWNLOAD_CONNECTOR_WINDOWS
-			},
-			{
-				platform: 'linux',
-				label: 'Linux x64',
-				filename: 'hi-connector-linux-amd64',
-				url: DOWNLOAD_CONNECTOR_LINUX
-			}
-		]
-	},
-	{
 		id: 'hostagent',
-		name: 'hi-hostagent',
+		name: 'Host package',
 		audience: 'Server hosts · Windows',
 		summary:
-			'Starts the game’s LAN server, restarts it if it exits, sends the beacon and heartbeats to the directory, and checks your port is reachable.',
+			'hi-hostagent and its helpers in one zip. Runs and supervises the game’s LAN server, lists it in the directory, proxies players, and runs your playlist and voting.',
 		files: [
 			{
 				platform: 'windows',
 				label: 'Windows x64',
-				filename: 'hi-hostagent-windows-amd64.exe',
+				filename: 'OpenLink-host-windows-amd64.zip',
 				url: DOWNLOAD_HOSTAGENT_WINDOWS
 			}
 		]

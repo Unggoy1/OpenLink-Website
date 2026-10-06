@@ -32,9 +32,7 @@ During private testing, every download link comes from an environment variable, 
 | `DOWNLOAD_CHECKSUMS_URL` | SHA-256 checksums file |
 | `DOWNLOAD_APP_WINDOWS` | `OpenLink-windows-amd64.exe` |
 | `DOWNLOAD_APP_LINUX` | `OpenLink-linux-amd64` |
-| `DOWNLOAD_CONNECTOR_WINDOWS` | `hi-connector-windows-amd64.exe` |
-| `DOWNLOAD_CONNECTOR_LINUX` | `hi-connector-linux-amd64` |
-| `DOWNLOAD_HOSTAGENT_WINDOWS` | `hi-hostagent-windows-amd64.exe` |
+| `DOWNLOAD_HOSTAGENT_WINDOWS` | `OpenLink-host-windows-amd64.zip` (host package) |
 | `DOWNLOAD_DIRECTORY_WINDOWS` | `hi-directory-windows-amd64.exe` |
 | `DOWNLOAD_DIRECTORY_LINUX` | `hi-directory-linux-amd64` |
 

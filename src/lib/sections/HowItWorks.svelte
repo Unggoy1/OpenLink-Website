@@ -38,8 +38,8 @@
 			<div>
 				<h3>Player</h3>
 				<p>
-					The OpenLink app (or <code>hi-connector</code>) replays the server’s beacon on your PC and
-					forwards game traffic to the host. To the game, it’s an ordinary LAN game.
+					The OpenLink app replays the server’s beacon on your PC and forwards game traffic to the
+					host. To the game, it’s an ordinary LAN game.
 				</p>
 			</div>
 		</li>

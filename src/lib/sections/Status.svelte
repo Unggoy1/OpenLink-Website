@@ -26,16 +26,14 @@
 		{
 			title: 'Limitations',
 			items: [
-				'The first player to join controls the lobby and picks the map and mode.',
-				'Every game update requires hosts and players to update together.'
+				'Every game update requires hosts and players to update together.',
+				'Map and mode control supports one game build at a time. After a Halo update, it waits for an OpenLink update.',
+				'Servers with voting need the latest OpenLink app.'
 			]
 		},
 		{
 			title: 'Planned',
-			items: [
-				'Server-side map/mode playlist rotation',
-				'Later: Unggoy integration to build server playlists from community maps'
-			]
+			items: ['Export server playlists from community maps on Unggoy']
 		}
 	];
 </script>

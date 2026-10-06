@@ -141,8 +141,13 @@
 		}
 
 		.top-link {
-			padding: 0 11px;
+			padding: 0 9px;
 			font-size: 14px;
+		}
+
+		/* Not enough room for every link and the button; Downloads is in the menu. */
+		.download {
+			display: none;
 		}
 	}
 

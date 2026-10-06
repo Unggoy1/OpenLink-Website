@@ -11,12 +11,12 @@
 			title: 'Safe by design',
 			rows: [
 				{
-					title: 'The game’s own LAN server',
-					text: 'No modded game files, no memory editing, no anti-cheat interaction.'
+					title: 'Players’ games are untouched',
+					text: 'The game’s own LAN server mode. No modded game files, no memory editing, no anti-cheat interaction.'
 				},
 				{
 					title: 'Players sign in normally',
-					text: 'OpenLink never handles Xbox or Microsoft credentials.'
+					text: 'OpenLink never handles Xbox or Microsoft credentials. No accounts, no sign-in data.'
 				},
 				{
 					title: 'Packets left untouched',
@@ -29,11 +29,15 @@
 			rows: [
 				{
 					title: 'One-click Join',
-					text: 'A desktop server browser for Windows and Linux.'
+					text: 'The OpenLink app: a desktop server browser for Windows and Linux.'
+				},
+				{
+					title: 'Vote for the next match',
+					text: 'Pick from up to 4 maps and modes, with thumbnails and live counts.'
 				},
 				{
 					title: 'Linux via Steam/Proton',
-					text: 'The OpenLink app and the hi-connector command-line client both run on Linux.'
+					text: 'The Linux build of the app runs alongside the game under Proton.'
 				},
 				{
 					title: 'No port forwarding',
@@ -50,7 +54,15 @@
 			rows: [
 				{
 					title: 'Hands-off server',
-					text: 'Auto-restarts the server, keeps the listing fresh, and can start at logon.'
+					text: 'Starts and supervises the server and keeps the listing fresh.'
+				},
+				{
+					title: 'Playlists and voting',
+					text: 'The server picks every map and mode from your playlist, or lets players vote.'
+				},
+				{
+					title: 'Server-owned lobby',
+					text: 'No lobby leader. Matches start on their own and end on their limits.'
 				},
 				{
 					title: 'Proxy mode (default)',
@@ -68,7 +80,7 @@
 <Panel id="features" title="Features">
 	{#snippet intro()}
 		OpenLink carries the game’s own LAN discovery and game traffic across the internet. It is a set
-		of small open-source tools written in Go using only the standard library.
+		of small open-source tools.
 	{/snippet}
 
 	<div class="groups">

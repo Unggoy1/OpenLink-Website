@@ -17,8 +17,7 @@
 			</h3>
 			<div class="body">
 				<p>
-					Small, open-source tools written in Go using only the standard library. Releases are built
-					by CI and include checksums.
+					Small, open-source tools. Releases are built by CI and include checksums.
 				</p>
 				{#if REPO_PUBLIC}
 					<a href={REPO_URL} class="btn small" target="_blank" rel="noopener">
