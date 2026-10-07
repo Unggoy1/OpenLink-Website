@@ -2,6 +2,7 @@
 	import DownloadButton from '#lib/components/DownloadButton.svelte';
 	import Panel from '#lib/components/Panel.svelte';
 	import ReleaseInfo from '#lib/components/ReleaseInfo.svelte';
+	import ServerNotice from '#lib/components/ServerNotice.svelte';
 	import type { Downloads, ProgramId } from '#lib/types.ts';
 
 	interface Props {
@@ -37,6 +38,11 @@
 					</div>
 				</div>
 				<p class="summary">{program.summary}</p>
+				{#if program.id === 'server'}
+					<div class="notice">
+						<ServerNotice />
+					</div>
+				{/if}
 				<div class="files">
 					{#each program.files as file (file.filename)}
 						<DownloadButton {file} />
@@ -85,6 +91,10 @@
 		font-size: 14px;
 		font-weight: 400;
 		opacity: 0.85;
+	}
+
+	.notice {
+		margin-top: 12px;
 	}
 
 	.files {

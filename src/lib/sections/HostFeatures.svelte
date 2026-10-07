@@ -17,14 +17,9 @@
 			text: 'Players vote in the OpenLink app between up to 4 random playlist entries (never the one just played), when the first player joins and after every match. Set the vote length (default 30 s), the number of choices and the start delay (default 5 s).'
 		},
 		{
-			key: 'server_owned',
-			title: 'Server-owned lobby',
-			text: 'No player becomes lobby leader: nobody gets lobby options, map or mode menus, Play or End Game. Matches end on their own time and score limits.'
-		},
-		{
 			key: 'auto_start',
 			title: 'Automatic start',
-			text: 'Without voting, the server starts the match by itself once enough players have been in the lobby for a while. Both are configurable.'
+			text: 'Without voting, the server starts each match by itself once enough players have been in the lobby for a while (by default one player for 10 s). Both are configurable.'
 		},
 		{
 			key: 'team_balance',
@@ -50,8 +45,10 @@
 
 <Panel id="features" title="What you can turn on">
 	{#snippet intro()}
-		All optional, set in <code>openlink-server.json</code>. Always on: player counts and ping in
-		the server list, reachability checks, kick and ban, and per-player rate limits.
+		All optional, set in <code>openlink-server.json</code>. Always on: the server owns the lobby (no
+		player becomes lobby leader, so nobody gets lobby options, map or mode menus, Play or End Game),
+		player counts and ping in the server list, reachability checks, kick and ban, and per-player rate
+		limits.
 	{/snippet}
 
 	<div class="options">
@@ -82,7 +79,7 @@
 	}
 
 	.option.wide {
-		grid-column: span 2;
+		grid-column: 1 / -1;
 	}
 
 	/* Unggoy .feature-item glass tile */
@@ -132,6 +129,10 @@
 		.options {
 			grid-template-columns: 1fr 1fr;
 		}
+
+		.option.wide {
+			grid-column: auto;
+		}
 	}
 
 	@media (max-width: 900px) {
@@ -143,10 +144,6 @@
 	@media (max-width: 640px) {
 		.options {
 			grid-template-columns: 1fr;
-		}
-
-		.option.wide {
-			grid-column: auto;
 		}
 	}
 </style>

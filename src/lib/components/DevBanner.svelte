@@ -1,14 +1,15 @@
 <script lang="ts">
-	import Icon from './Icon.svelte';
+	import Icon from "./Icon.svelte";
 </script>
 
 <div class="dev-banner-wrap">
 	<aside class="dev-banner" aria-label="Development status">
 		<Icon name="warning" size={26} class="dev-banner-icon" />
 		<p>
-			<strong>This project is in very early development.</strong>
-			Expect lots of things to be broken or buggy.
-			<a href="/about#status" class="status-link">See what’s been tested</a>
+			<strong>This project is in early development.</strong> Expect bugs and missing
+			features. Downloads and source code are shared as-is for testing and feedback,
+			so use them at your own risk. I'm sharing now to gauge interest and get ideas/feedback
+			from others.
 		</p>
 	</aside>
 </div>

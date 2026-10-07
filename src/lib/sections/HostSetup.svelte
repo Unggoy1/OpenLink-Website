@@ -3,6 +3,7 @@
 	import DownloadButton from '#lib/components/DownloadButton.svelte';
 	import Panel from '#lib/components/Panel.svelte';
 	import ReleaseInfo from '#lib/components/ReleaseInfo.svelte';
+	import ServerNotice from '#lib/components/ServerNotice.svelte';
 	import { DIRECTORY_URL } from '#lib/site.ts';
 	import type { Program, Release } from '#lib/types.ts';
 
@@ -20,9 +21,6 @@
 		'Public IPv4 address',
 		'A router where you can forward UDP 1343'
 	];
-
-	const firewallRule =
-		'netsh advfirewall firewall add rule name="OpenLink Server" dir=in action=allow protocol=UDP localport=1343 program="C:\\path\\to\\openlink-server.exe"';
 </script>
 
 <Panel id="setup" title="Host a server">
@@ -44,6 +42,7 @@
 			<div class="grow">
 				<h3>Download and unzip OpenLink Server</h3>
 				<p>Unzip everything into one folder and keep the files together.</p>
+				<ServerNotice />
 				<ReleaseInfo {release} />
 				{#if server}
 					<div class="files">
@@ -60,10 +59,10 @@
 			<div class="grow">
 				<h3>Forward the game port</h3>
 				<p>
-					On your router, forward <strong>UDP 1343</strong> to this PC. Then allow OpenLink Server
-					through the Windows firewall (once, as administrator, with your own path):
+					On your router, forward <strong>UDP 1343</strong> to this PC, and only that port. If
+					Windows asks whether to let OpenLink Server through the firewall, allow it. Your router’s
+					manual or support site covers how to forward a port.
 				</p>
-				<CodeBlock code={firewallRule} />
 				<p>
 					Or let OpenLink Server ask your router to do it with
 					<a href="#auto_port_forward" class="text-link">automatic port forwarding</a>.
