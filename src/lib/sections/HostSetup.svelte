@@ -97,7 +97,9 @@
 					In <code>openlink-server.json</code>, fill in your server’s <code>name</code>,
 					<code>description</code> and <code>region</code>. In <code>playlist.json</code>, list the
 					maps and modes to play (see the <a href="#playlist" class="text-link">playlist format</a
-					>). Every server runs from a playlist.
+					>). Every server runs from a playlist. Give an entry <code>teams</code> if its mode is
+					made for more than two teams. Team balance is on by default; change it with
+					<a href="#team_balance" class="text-link"><code>team_balance</code></a>.
 				</p>
 			</div>
 		</li>

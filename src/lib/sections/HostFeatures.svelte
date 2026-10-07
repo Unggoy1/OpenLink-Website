@@ -6,6 +6,7 @@
 		key: string;
 		title: string;
 		text: string;
+		wide?: boolean; // spans two grid columns
 	}
 
 	// Optional settings in openlink-server.json.
@@ -18,12 +19,18 @@
 		{
 			key: 'server_owned',
 			title: 'Server-owned lobby',
-			text: 'No player becomes lobby leader, and players can’t start or end matches. Matches end on their own time and score limits.'
+			text: 'No player becomes lobby leader: nobody gets lobby options, map or mode menus, Play or End Game. Matches end on their own time and score limits.'
 		},
 		{
 			key: 'auto_start',
 			title: 'Automatic start',
 			text: 'Without voting, the server starts the match by itself once enough players have been in the lobby for a while. Both are configurable.'
+		},
+		{
+			key: 'team_balance',
+			title: 'Team balance',
+			wide: true,
+			text: 'On by default ("even"). Before every team match the server evens out the teams, moving as few players as it can, so friends on one team stay together. "shuffle" deals random teams each match; "off" leaves players’ picks alone. Players can still switch teams mid-match. In free-for-all modes everyone always gets their own team.'
 		},
 		{
 			key: 'auto_port_forward',
@@ -49,7 +56,7 @@
 
 	<div class="options">
 		{#each options as option (option.key)}
-			<article class="option" id={option.key}>
+			<article class="option" class:wide={option.wide} id={option.key}>
 				<code class="key">{option.key}</code>
 				<h3>{option.title}</h3>
 				<p>{option.text}</p>
@@ -69,8 +76,13 @@
 <style>
 	.options {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-flow: dense;
 		gap: 10px;
+	}
+
+	.option.wide {
+		grid-column: span 2;
 	}
 
 	/* Unggoy .feature-item glass tile */
@@ -131,6 +143,10 @@
 	@media (max-width: 640px) {
 		.options {
 			grid-template-columns: 1fr;
+		}
+
+		.option.wide {
+			grid-column: auto;
 		}
 	}
 </style>

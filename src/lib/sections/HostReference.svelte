@@ -14,7 +14,7 @@
 		{ name: 'openlink-loader.exe', text: 'Loads the DLL into the server OpenLink Server starts.' },
 		{
 			name: 'openlink-server.example.json',
-			text: 'Example config with a playlist, voting and a server-owned lobby.'
+			text: 'Example config with a playlist, voting, a server-owned lobby and team balance.'
 		},
 		{ name: 'playlist.example.json', text: 'Example playlist.' },
 		{ name: 'README.txt', text: 'Setup steps.' }
@@ -48,6 +48,13 @@
       "name": "Fiesta Slayer on Interference",
       "map":  {"asset_id": "70f884d7-6869-469d-b4d2-4219627e2d83", "version_id": "cc791b4b-054a-4653-9034-5dc13c809c54"},
       "mode": {"asset_id": "aca7bbf8-7a18-4aae-8785-1bd3f58275fd", "version_id": "3685f6b2-2860-4e98-9d13-513087edb465"}
+    },
+    {
+      "id": "interference-fiesta-2s",
+      "name": "Fiesta Slayer on Interference, teams of 2",
+      "map":  {"asset_id": "70f884d7-6869-469d-b4d2-4219627e2d83", "version_id": "cc791b4b-054a-4653-9034-5dc13c809c54"},
+      "mode": {"asset_id": "aca7bbf8-7a18-4aae-8785-1bd3f58275fd", "version_id": "3685f6b2-2860-4e98-9d13-513087edb465"},
+      "teams": {"size": 2}
     }
   ]
 }`;
@@ -97,6 +104,14 @@
 				as lowercase UUIDs. Pin a version.
 			</li>
 			<li><code>enabled</code>: optional, default <code>true</code>.</li>
+			<li>
+				<code>teams</code>: optional, for modes made for more than two teams.
+				<code>{'{"count": 4}'}</code> sets the number of teams (2–8);
+				<code>{'{"size": 2}'}</code> sets players per team, and the server makes as many teams as the
+				players need (at least two; 8 players get 4 teams of 2). Without it a team mode uses two teams.
+				It applies even with <a href="#team_balance" class="text-link"><code>team_balance</code></a>
+				off; free-for-all modes ignore it.
+			</li>
 			<li>
 				<code>selection</code>: <code>"shuffle_bag"</code> (default) or <code>"sequential"</code>,
 				for rotation without voting.
