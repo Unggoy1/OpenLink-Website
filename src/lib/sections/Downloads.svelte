@@ -3,6 +3,7 @@
 	import Panel from '#lib/components/Panel.svelte';
 	import ReleaseInfo from '#lib/components/ReleaseInfo.svelte';
 	import ServerNotice from '#lib/components/ServerNotice.svelte';
+	import { REPO_PUBLIC, RELEASES_URL } from '#lib/site.ts';
 	import type { Downloads, ProgramId } from '#lib/types.ts';
 
 	interface Props {
@@ -25,7 +26,10 @@
 		version as the server they join.
 	{/snippet}
 
-	<ReleaseInfo release={downloads.release} />
+	<p class="versions">
+		The app and the server have their own versions. A server update doesn’t need a new app; when a
+		server does need one, the app tells you.
+	</p>
 
 	<div class="programs">
 		{#each shown as program (program.id)}
@@ -36,6 +40,9 @@
 						<h3>{program.name}</h3>
 						<p class="audience">{program.audience}</p>
 					</div>
+				</div>
+				<div class="version">
+					<ReleaseInfo release={program.release} allReleases={false} />
 				</div>
 				<p class="summary">{program.summary}</p>
 				{#if program.id === 'server'}
@@ -59,6 +66,10 @@
 		Want to run your own server list? <a href="/about#directory" class="text-link"
 			>OpenLink Directory</a
 		> is on the About page.
+		{#if REPO_PUBLIC}
+			Older versions and release notes are on
+			<a href={RELEASES_URL} class="text-link" target="_blank" rel="noopener">GitHub</a>.
+		{/if}
 	</p>
 </Panel>
 
@@ -84,6 +95,21 @@
 		font-size: 14px;
 		font-weight: 500;
 		color: var(--sidebar-color);
+	}
+
+	.versions {
+		margin-bottom: 16px;
+		font-size: 14px;
+		font-weight: 400;
+		opacity: 0.85;
+	}
+
+	.version {
+		margin-top: 12px;
+	}
+
+	.version :global(.release) {
+		margin-bottom: 0;
 	}
 
 	.summary {

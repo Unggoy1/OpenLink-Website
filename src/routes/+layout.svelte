@@ -29,7 +29,7 @@
 	{@render children()}
 </main>
 
-<Footer release={data.downloads.release} />
+<Footer programs={data.downloads.programs} />
 
 <style>
 	.skip-link {

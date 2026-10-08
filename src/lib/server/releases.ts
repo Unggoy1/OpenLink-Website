@@ -1,4 +1,9 @@
-// Reads the newest published release of the OpenLink repo from the GitHub API.
+// Reads the published releases of the OpenLink repo from the GitHub API.
+//
+// The programs share one version series, but a release carries only the
+// programs that changed (a server-only fix has no app files), so callers look
+// for the newest release that has each program's file rather than the newest
+// release overall.
 //
 // The result is kept in memory for a few minutes per server instance, and
 // re-checked with the ETag so unchanged answers don't count against GitHub's
@@ -13,7 +18,7 @@ export interface ReleaseAsset {
 	size: number;
 }
 
-export interface LatestRelease {
+export interface PublishedRelease {
 	version: string;
 	/** The release page on GitHub. */
 	url: string;
@@ -33,29 +38,30 @@ interface GitHubRelease {
 }
 
 // /releases/latest skips pre-releases, and the release workflow marks every
-// tag with a dash (v0.8.0-alpha.1) as one, so list releases and take the newest.
-const API_URL = `https://api.github.com/repos/${REPO_SLUG}/releases?per_page=10`;
+// tag with a dash (v0.8.0-alpha.1) as one, so list releases instead. A page of
+// 50 reaches past a long run of releases that skip a program.
+const API_URL = `https://api.github.com/repos/${REPO_SLUG}/releases?per_page=50`;
 const FRESH_MS = 5 * 60 * 1000;
 const TIMEOUT_MS = 5000;
 
-let cache: { release: LatestRelease | null; etag?: string; checkedAt: number } | undefined;
-let pending: Promise<LatestRelease | null> | undefined;
+let cache: { releases: PublishedRelease[] | null; etag?: string; checkedAt: number } | undefined;
+let pending: Promise<PublishedRelease[] | null> | undefined;
 
-function toLatest(releases: GitHubRelease[]): LatestRelease | null {
-	const newest = releases.find((r) => !r.draft);
-	if (!newest) return null;
-	return {
-		version: newest.tag_name,
-		url: newest.html_url,
-		publishedAt: newest.published_at ?? undefined,
-		prerelease: newest.prerelease,
-		assets: Object.fromEntries(
-			newest.assets.map((a) => [a.name, { url: a.browser_download_url, size: a.size }])
-		)
-	};
+function toPublished(releases: GitHubRelease[]): PublishedRelease[] {
+	return releases
+		.filter((r) => !r.draft)
+		.map((r) => ({
+			version: r.tag_name,
+			url: r.html_url,
+			publishedAt: r.published_at ?? undefined,
+			prerelease: r.prerelease,
+			assets: Object.fromEntries(
+				r.assets.map((a) => [a.name, { url: a.browser_download_url, size: a.size }])
+			)
+		}));
 }
 
-async function refresh(): Promise<LatestRelease | null> {
+async function refresh(): Promise<PublishedRelease[] | null> {
 	const headers: Record<string, string> = {
 		accept: 'application/vnd.github+json',
 		'x-github-api-version': '2022-11-28',
@@ -68,23 +74,24 @@ async function refresh(): Promise<LatestRelease | null> {
 		const res = await fetch(API_URL, { headers, signal: AbortSignal.timeout(TIMEOUT_MS) });
 		if (res.status === 304 && cache) {
 			cache.checkedAt = Date.now();
-			return cache.release;
+			return cache.releases;
 		}
 		if (!res.ok) throw new Error(`GitHub answered ${res.status} ${res.statusText}`);
 
-		const release = toLatest((await res.json()) as GitHubRelease[]);
-		cache = { release, etag: res.headers.get('etag') ?? undefined, checkedAt: Date.now() };
-		return release;
+		const releases = toPublished((await res.json()) as GitHubRelease[]);
+		cache = { releases, etag: res.headers.get('etag') ?? undefined, checkedAt: Date.now() };
+		return releases;
 	} catch (error) {
-		console.error('Could not read the latest OpenLink release:', error);
+		console.error('Could not read the OpenLink releases:', error);
 		// Keep serving the last good answer; try again after the next interval.
 		if (cache) cache.checkedAt = Date.now();
-		return cache?.release ?? null;
+		return cache?.releases ?? null;
 	}
 }
 
-export async function getLatestRelease(): Promise<LatestRelease | null> {
-	if (cache && Date.now() - cache.checkedAt < FRESH_MS) return cache.release;
+/** Published releases, newest first; null when GitHub couldn't be reached and nothing was cached. */
+export async function getReleases(): Promise<PublishedRelease[] | null> {
+	if (cache && Date.now() - cache.checkedAt < FRESH_MS) return cache.releases;
 	pending ??= refresh().finally(() => (pending = undefined));
 	return pending;
 }

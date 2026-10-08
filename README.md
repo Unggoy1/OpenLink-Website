@@ -24,9 +24,10 @@ Sections live in `src/lib/sections/`; nav links are `NAV_LINKS` in `src/lib/site
 
 ## Downloads
 
-Download links, file sizes and the build version come from the newest published release of [Unggoy1/OpenLink](https://github.com/Unggoy1/OpenLink/releases), pre-releases included. Publishing a release is all it takes; the site picks it up within a few minutes.
+Download links, file sizes and versions come from the published releases of [Unggoy1/OpenLink](https://github.com/Unggoy1/OpenLink/releases), pre-releases included. Publishing a release is all it takes; the site picks it up within a few minutes.
 
-- Buttons are matched to release files by name (`src/lib/server/downloads.ts`), so they must match the names the release workflow publishes. A file missing from the release shows "Not available yet".
+- The programs share one version series, but a release carries only the programs that changed. Each program uses the newest release that has its main file (its first file in `src/lib/server/downloads.ts`), so the app and the server can show different versions. The footer shows both.
+- Buttons are matched to release files by name (`src/lib/server/downloads.ts`), so they must match the names the release workflow publishes. A file missing from the program's release shows "Not available yet".
 - `src/lib/server/releases.ts` asks the GitHub API and keeps the answer in memory for 5 minutes, re-checking with an ETag. Pages also send `s-maxage=300, stale-while-revalidate=3600`, so Vercel's CDN serves most visits without asking GitHub at all.
 - If GitHub can't be reached, the last good answer is reused; with none, the page says it couldn't load the release and links to the releases page.
 

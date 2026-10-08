@@ -14,6 +14,6 @@
 	<title>Host a server · {SITE_NAME}</title>
 </svelte:head>
 
-<HostSetup {server} release={data.downloads.release} />
+<HostSetup {server} />
 <HostFeatures />
 <HostReference />

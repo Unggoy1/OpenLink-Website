@@ -3,10 +3,13 @@
 	import type { Release } from '#lib/types.ts';
 
 	interface Props {
+		/** The newest release that carries this program (programs are versioned separately). */
 		release: Release | null;
+		/** Shows the "All releases on GitHub" link; off where a page lists several programs. */
+		allReleases?: boolean;
 	}
 
-	let { release }: Props = $props();
+	let { release, allReleases = true }: Props = $props();
 
 	// UTC so the server-rendered and hydrated dates always match.
 	const dateFormat = new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' });
@@ -16,7 +19,7 @@
 <div class="release">
 	{#if release}
 		<a href={release.url} class="tag light" target="_blank" rel="noopener">
-			Latest build {release.version}{#if published}&ensp;·&ensp;{published}{/if}
+			Version {release.version}{#if published}&ensp;·&ensp;{published}{/if}
 		</a>
 		{#if release.prerelease}
 			<span class="tag">Pre-release</span>
@@ -27,7 +30,7 @@
 	{:else}
 		<span class="tag">Couldn’t load the latest release from GitHub</span>
 	{/if}
-	{#if REPO_PUBLIC}
+	{#if REPO_PUBLIC && allReleases}
 		<a href={RELEASES_URL} class="tag" target="_blank" rel="noopener">All releases on GitHub</a>
 	{/if}
 </div>
@@ -40,7 +43,7 @@
 		margin-bottom: 16px;
 	}
 
-	/* Same as .btn:hover, also for the light "Latest build" tag. */
+	/* Same as .btn:hover, also for the light "Version" tag. */
 	a.tag:hover {
 		background-color: var(--button-bg-hover);
 		color: var(--button-color-hover);

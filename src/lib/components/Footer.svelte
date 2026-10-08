@@ -2,13 +2,24 @@
 	import Logo from './Logo.svelte';
 	import Icon from './Icon.svelte';
 	import { DISCORD_URL, REPO_PUBLIC, REPO_URL, UNGGOY_URL } from '#lib/site.ts';
-	import type { Release } from '#lib/types.ts';
+	import type { Program } from '#lib/types.ts';
 
 	interface Props {
-		release: Release | null;
+		programs: Program[];
 	}
 
-	let { release }: Props = $props();
+	let { programs }: Props = $props();
+
+	// The app and the server are versioned separately; show both.
+	const versions = $derived(
+		[
+			{ id: 'app', label: 'App' },
+			{ id: 'server', label: 'Server' }
+		].flatMap(({ id, label }) => {
+			const release = programs.find((p) => p.id === id)?.release;
+			return release ? [{ label, release }] : [];
+		})
+	);
 </script>
 
 <!-- Laid out like Unggoy's .sidebar-footer: social icons, then small text links -->
@@ -36,9 +47,11 @@
 				</a>
 			</div>
 			<div class="footer-links">
-				{#if release}
-					<a href={release.url} class="footer-link" target="_blank" rel="noopener">{release.version}</a>
-				{/if}
+				{#each versions as v (v.label)}
+					<a href={v.release.url} class="footer-link" target="_blank" rel="noopener"
+						>{v.label} {v.release.version}</a
+					>
+				{/each}
 				<a href="/host" class="footer-link">Host a server</a>
 				<a href="/about#status" class="footer-link">Status</a>
 				<a href="/about#source" class="footer-link">Source</a>

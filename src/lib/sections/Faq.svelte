@@ -21,6 +21,10 @@
 			a: 'Halo Infinite on Steam, at the same version as the server. After a game update, hosts and players update together.'
 		},
 		{
+			q: 'Do I need to update the app when servers update?',
+			a: 'Usually not. The OpenLink app and OpenLink Server have their own versions, and most server updates don’t need a new app. When one does, the app shows <strong>Update OpenLink to join</strong> on that server and tells you a newer version is out.'
+		},
+		{
 			q: 'Who picks the map and mode?',
 			a: 'The server, from its playlist; never a player. On servers with voting, a vote opens in the OpenLink app when you join and after every match: click a card to vote, and the most votes wins (a tie, or no votes, is settled at random).'
 		},

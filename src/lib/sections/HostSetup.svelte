@@ -5,14 +5,13 @@
 	import ReleaseInfo from '#lib/components/ReleaseInfo.svelte';
 	import ServerNotice from '#lib/components/ServerNotice.svelte';
 	import { DIRECTORY_URL } from '#lib/site.ts';
-	import type { Program, Release } from '#lib/types.ts';
+	import type { Program } from '#lib/types.ts';
 
 	interface Props {
 		server: Program | undefined;
-		release: Release | null;
 	}
 
-	let { server, release }: Props = $props();
+	let { server }: Props = $props();
 
 	const requirements = [
 		'Windows PC',
@@ -43,7 +42,7 @@
 				<h3>Download and unzip OpenLink Server</h3>
 				<p>Unzip everything into one folder and keep the files together.</p>
 				<ServerNotice />
-				<ReleaseInfo {release} />
+				<ReleaseInfo release={server?.release ?? null} />
 				{#if server}
 					<div class="files">
 						{#each server.files as file (file.filename)}

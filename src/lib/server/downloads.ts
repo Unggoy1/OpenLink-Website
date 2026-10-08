@@ -1,13 +1,15 @@
 // The programs offered for download and the release file each button links to.
 //
-// Files come from the newest release on GitHub (see releases.ts), matched by
-// the file names the release workflow publishes. A file missing from that
-// release shows as "Not available yet".
+// Each program's files come from the newest release on GitHub that carries
+// its main (first) file (see releases.ts), matched by the file names the
+// release workflow publishes. A release carries only the programs that
+// changed, so the app and the server can show different versions. A file
+// missing from that release shows as "Not available yet".
 
 import type { Downloads, Program } from '#lib/types.ts';
-import { getLatestRelease } from './releases.ts';
+import { getReleases } from './releases.ts';
 
-type ProgramDef = Omit<Program, 'files'> & {
+type ProgramDef = Omit<Program, 'files' | 'release'> & {
 	files: Omit<Program['files'][number], 'url' | 'size'>[];
 };
 
@@ -57,24 +59,30 @@ const PROGRAMS: ProgramDef[] = [
 const CHECKSUMS_FILE = 'SHA256SUMS';
 
 export async function getDownloads(): Promise<Downloads> {
-	const latest = await getLatestRelease();
-	const asset = (name: string) => latest?.assets[name];
+	const releases = (await getReleases()) ?? [];
 
 	return {
-		release: latest && {
-			version: latest.version,
-			url: latest.url,
-			publishedAt: latest.publishedAt,
-			prerelease: latest.prerelease,
-			checksumsUrl: asset(CHECKSUMS_FILE)?.url
-		},
-		programs: PROGRAMS.map((program) => ({
-			...program,
-			files: program.files.map((file) => ({
-				...file,
-				url: asset(file.filename)?.url,
-				size: asset(file.filename)?.size
-			}))
-		}))
+		programs: PROGRAMS.map((program) => {
+			const main = program.files[0].filename;
+			const found = releases.find((r) => main in r.assets);
+			const asset = (name: string) => found?.assets[name];
+			return {
+				...program,
+				release: found
+					? {
+							version: found.version,
+							url: found.url,
+							publishedAt: found.publishedAt,
+							prerelease: found.prerelease,
+							checksumsUrl: asset(CHECKSUMS_FILE)?.url
+						}
+					: null,
+				files: program.files.map((file) => ({
+					...file,
+					url: asset(file.filename)?.url,
+					size: asset(file.filename)?.size
+				}))
+			};
+		})
 	};
 }
