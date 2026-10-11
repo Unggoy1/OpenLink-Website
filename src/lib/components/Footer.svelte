@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Logo from './Logo.svelte';
-	import Icon from './Icon.svelte';
-	import { DISCORD_URL, REPO_PUBLIC, REPO_URL, UNGGOY_URL } from '#lib/site.ts';
-	import type { Program } from '#lib/types.ts';
+	import Logo from "./Logo.svelte";
+	import Icon from "./Icon.svelte";
+	import { DISCORD_URL, REPO_PUBLIC, REPO_URL, UNGGOY_URL } from "#lib/site.ts";
+	import type { Program } from "#lib/types.ts";
 
 	interface Props {
 		programs: Program[];
@@ -13,12 +13,12 @@
 	// The app and the server are versioned separately; show both.
 	const versions = $derived(
 		[
-			{ id: 'app', label: 'App' },
-			{ id: 'server', label: 'Server' }
+			{ id: "app", label: "App" },
+			{ id: "server", label: "Server" },
 		].flatMap(({ id, label }) => {
 			const release = programs.find((p) => p.id === id)?.release;
 			return release ? [{ label, release }] : [];
-		})
+		}),
 	);
 </script>
 
@@ -27,14 +27,23 @@
 	<div class="footer-inner">
 		<div class="footer-brand">
 			<Logo height={30} />
-			<a href={UNGGOY_URL} class="unggoy-link" target="_blank" rel="noopener">
-				Browse maps on Unggoy
-			</a>
+			<!-- <a href={UNGGOY_URL} class="unggoy-link" target="_blank" rel="noopener"> -->
+			<!-- 	Browse maps on Unggoy -->
+			<!-- </a> -->
+			<p class="disclaimer">
+				Unofficial fan project. Not affiliated with or endorsed by Microsoft,
+				Xbox or Halo Studios. Halo is a trademark of Microsoft.
+			</p>
 		</div>
 
 		<div class="footer-meta">
 			<div class="footer-socials">
-				<a href={DISCORD_URL} target="_blank" rel="noopener" aria-label="Discord">
+				<a
+					href={DISCORD_URL}
+					target="_blank"
+					rel="noopener"
+					aria-label="Discord"
+				>
 					<Icon name="discord" size={24} class="social-icon" />
 				</a>
 				{#if REPO_PUBLIC}
@@ -46,24 +55,8 @@
 					<Icon name="map" size={24} class="social-icon" />
 				</a>
 			</div>
-			<div class="footer-links">
-				{#each versions as v (v.label)}
-					<a href={v.release.url} class="footer-link" target="_blank" rel="noopener"
-						>{v.label} {v.release.version}</a
-					>
-				{/each}
-				<a href="/host" class="footer-link">Host a server</a>
-				<a href="/about#status" class="footer-link">Status</a>
-				<a href="/about#source" class="footer-link">Source</a>
-				<a href={UNGGOY_URL} class="footer-link" target="_blank" rel="noopener">unggoy.xyz</a>
-			</div>
 		</div>
 	</div>
-
-	<p class="disclaimer">
-		Unofficial fan project. Not affiliated with or endorsed by Microsoft, Xbox or Halo Studios. Halo
-		is a trademark of Microsoft.
-	</p>
 </footer>
 
 <style>
@@ -138,8 +131,8 @@
 	}
 
 	.disclaimer {
-		margin-top: 16px;
-		padding: 0 8px;
+		margin-top: 5px;
+		/* padding: 0 0px; */
 		font-size: 12px;
 		font-weight: 400;
 		color: var(--sidebar-color);
@@ -154,7 +147,6 @@
 	}
 
 	@media (max-width: 640px) {
-
 		.footer-inner {
 			flex-direction: column;
 		}
