@@ -12,8 +12,8 @@
 		<p class="welcome-tagline">Dedicated servers for Halo Infinite</p>
 		<p class="welcome-description">
 			Run your own Halo Infinite server, list it in a community directory, and let players anywhere
-			join it with one click. Built on the game’s own LAN server mode; players’ games are never
-			modified.
+			find, join and vote on it from a server browser inside the game. Built on the game’s own LAN
+			server mode.
 		</p>
 		<div class="ctas">
 			<a href="#downloads" class="btn light">

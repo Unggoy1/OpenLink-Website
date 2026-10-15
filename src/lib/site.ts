@@ -5,7 +5,7 @@ export const SITE_URL = "https://openlink.unggoy.xyz";
 export const SITE_TITLE =
   "OpenLink by Unggoy: community dedicated servers for Halo Infinite";
 export const SITE_DESCRIPTION =
-  "Run your own Halo Infinite server, list it in a community directory, and let players anywhere join it. Uses the game’s own LAN server mode; players’ games are never modified.";
+  "Run your own Halo Infinite server, list it in a community directory, and let players anywhere join it from an in-game server browser. Built on the game’s own LAN server mode.";
 
 /** Public directory API. Not a page: only shown where hosts or players need the address. */
 export const DIRECTORY_URL = "https://openlink-dir.unggoy.xyz";
@@ -50,12 +50,5 @@ export const NAV_LINKS: NavLink[] = [
     desktop: true,
     mobileIcon: "server",
     short: "Host",
-  },
-  {
-    href: "/about",
-    label: "How it works",
-    desktop: true,
-    mobileIcon: "list",
-    short: "About",
   },
 ];

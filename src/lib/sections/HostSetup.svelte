@@ -42,7 +42,7 @@
 				<h3>Download and unzip OpenLink Server</h3>
 				<p>Unzip everything into one folder and keep the files together.</p>
 				<ServerNotice />
-				<ReleaseInfo release={server?.release ?? null} />
+				<ReleaseInfo release={server?.release ?? null} unreleased={server?.unreleased} />
 				{#if server}
 					<div class="files">
 						{#each server.files as file (file.filename)}

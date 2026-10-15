@@ -6,47 +6,55 @@
 	const faqs = [
 		{
 			q: 'Is this safe for my account?',
-			a: 'You sign in to the game normally, and OpenLink never handles your Xbox or Microsoft credentials. Players’ games are never modified and OpenLink doesn’t interact with anti-cheat; it only uses the game’s own LAN server mode. It is still an unofficial tool, so play at your own discretion.'
+			a: 'You sign in to the game normally, and OpenLink never handles your Xbox or Microsoft credentials. OpenLink Launcher starts Halo without anti-cheat and changes it in memory only: it never changes game files or anti-cheat files, services or settings. It is still an unofficial tool that modifies the running game, so play at your own discretion and at your own risk with respect to the game’s terms.'
+		},
+		{
+			q: 'Where do I put the launcher?',
+			a: 'In a folder of its own, for example on your Desktop or in Documents. <strong>Not in your Halo Infinite folder</strong>: extra files in the game folder can cause problems with anti-cheat. Keep <code>openlink-launcher.exe</code> and <code>openlink-launcher.dll</code> together.'
+		},
+		{
+			q: 'Does it affect Halo when I play normally?',
+			a: 'No. Close the launcher’s game when you are done and start Halo Infinite from Steam as usual: anti-cheat runs and matchmaking works as before. While Halo runs through the launcher, official matchmaking is unavailable and the game shows OFFLINE; that is expected.'
 		},
 		{
 			q: 'Do I need to port forward to play?',
-			a: 'No. Only hosts forward a port. Players just run the OpenLink app and join.'
+			a: 'No. Only hosts forward a port. Players just run OpenLink Launcher and join.'
 		},
 		{
 			q: 'Why can’t I join a server?',
-			a: 'Usually the server is on a different game version (it is still listed but can’t be joined), or it is currently unreachable. The app warns you if a server stops answering or the directory can’t be reached. If you joined but the server isn’t in the game’s list, switch the app to <strong>LAN broadcast</strong> in Settings.'
+			a: 'Usually it is full or not accepting players right now, or it is unreachable; the browser says why instead of joining. A server that needs a newer launcher shows <strong>Update OpenLink Launcher</strong>.'
 		},
 		{
 			q: 'Which version of the game do I need?',
-			a: 'Halo Infinite on Steam, at the same version as the server. After a game update, hosts and players update together.'
+			a: 'Halo Infinite on Steam (its final PC version). The launcher checks the game before it starts it.'
 		},
 		{
-			q: 'Do I need to update the app when servers update?',
-			a: 'Usually not. The OpenLink app and OpenLink Server have their own versions, and most server updates don’t need a new app. When one does, the app shows <strong>Update OpenLink to join</strong> on that server and tells you a newer version is out.'
+			q: 'Do I need to update the launcher when servers update?',
+			a: 'Usually not. OpenLink Launcher and OpenLink Server have their own versions, and most server updates don’t need a new launcher. When a newer launcher is out, it offers its download page when it starts.'
 		},
 		{
 			q: 'Who picks the map and mode?',
-			a: 'The server, from its playlist; never a player. On servers with voting, a vote opens in the OpenLink app when you join and after every match: click a card to vote, and the most votes wins (a tie, or no votes, is settled at random).'
+			a: 'The server, from its playlist; never a player. On servers with voting, a vote panel appears in the lobby when you join and after every match: click a choice, press Alt+1–4, or hold View and press the D-pad. Most votes wins; a tie, or no votes, is settled at random.'
 		},
 		{
-			q: 'I’m in the game. How do I know a vote has started?',
-			a: 'The app plays a short chime (you can turn it off in Settings), shows a Windows notification and flashes its taskbar button. Windows may hold the notification back while the game is focused, but the chime still plays. Alt-tab to the app to vote.'
+			q: 'How do I leave a server?',
+			a: 'Press <strong>Back</strong> in the server’s lobby. A <strong>Leave Server?</strong> dialog asks first; Okay leaves the server and takes you back to Custom Game, Cancel keeps you in.'
 		},
 		{
-			q: 'The lobby shows a different map than the app. Which is right?',
-			a: 'The app. The game’s own lobby screen can show another map name until the match loads.'
+			q: 'The lobby shows a different map. Which is right?',
+			a: 'Before anyone votes, the lobby shows the game’s default map. Once you vote, its map picture follows your choice, then the winning map, which is what is played.'
 		},
 		{
 			q: 'Does it work on Linux?',
-			a: 'There is a Linux build of the OpenLink app for playing under Steam/Proton, but it hasn’t been tested yet. Hosting needs Windows.'
+			a: 'No. OpenLink Launcher is Windows only. Hosting needs Windows too.'
 		},
 		{
 			q: 'Can I host and play on the same PC?',
-			a: 'Yes. The app switches to <strong>LAN broadcast</strong> by itself when the server runs on your PC, because the server occupies the LAN discovery port. If the game doesn’t see your server, check that setting.'
+			a: 'Yes. The launcher notices a server running on your PC and adjusts how it connects by itself.'
 		},
 		{
 			q: 'Does hosting modify the game?',
-			a: 'Only on the host’s side. To control maps and modes, OpenLink Server loads a small DLL into the host’s own server process. It never touches players’ games or anti-cheat. Hosts run it at their own risk with respect to the game’s terms of service. More in the <a href="/host" class="text-link">hosting guide</a>.'
+			a: 'On the host’s side, OpenLink Server loads a small DLL into the host’s own server process to control maps, modes and the lobby. Hosts run it at their own risk with respect to the game’s terms of service. More in the <a href="/host" class="text-link">hosting guide</a>.'
 		}
 	];
 </script>

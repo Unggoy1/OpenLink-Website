@@ -2,6 +2,7 @@
 	import DownloadButton from '#lib/components/DownloadButton.svelte';
 	import Panel from '#lib/components/Panel.svelte';
 	import ReleaseInfo from '#lib/components/ReleaseInfo.svelte';
+	import LauncherNotice from '#lib/components/LauncherNotice.svelte';
 	import ServerNotice from '#lib/components/ServerNotice.svelte';
 	import { REPO_PUBLIC, RELEASES_URL } from '#lib/site.ts';
 	import type { Downloads, ProgramId } from '#lib/types.ts';
@@ -13,7 +14,7 @@
 	let { downloads }: Props = $props();
 
 	const guides: Partial<Record<ProgramId, { href: string; label: string }>> = {
-		app: { href: '#play', label: 'How to play' },
+		launcher: { href: '#play', label: 'How to play' },
 		server: { href: '/host', label: 'Hosting guide' }
 	};
 
@@ -22,13 +23,12 @@
 
 <Panel id="downloads" title="Downloads">
 	{#snippet intro()}
-		Players need the OpenLink app. Hosts need OpenLink Server. Everyone needs the same Halo Infinite
-		version as the server they join.
+		Players need OpenLink Launcher. Hosts need OpenLink Server. Both need Halo Infinite on Steam.
 	{/snippet}
 
 	<p class="versions">
-		The app and the server have their own versions. A server update doesn’t need a new app; when a
-		server does need one, the app tells you.
+		The launcher and the server have their own versions. A server update doesn’t need a new
+		launcher; when one is out, the launcher offers it when it starts.
 	</p>
 
 	<div class="programs">
@@ -42,12 +42,16 @@
 					</div>
 				</div>
 				<div class="version">
-					<ReleaseInfo release={program.release} allReleases={false} />
+					<ReleaseInfo release={program.release} unreleased={program.unreleased} allReleases={false} />
 				</div>
 				<p class="summary">{program.summary}</p>
 				{#if program.id === 'server'}
 					<div class="notice">
 						<ServerNotice />
+					</div>
+				{:else if program.id === 'launcher'}
+					<div class="notice">
+						<LauncherNotice />
 					</div>
 				{/if}
 				<div class="files">
@@ -63,9 +67,9 @@
 	</div>
 
 	<p class="more">
-		Want to run your own server list? <a href="/about#directory" class="text-link"
+		Want to run your own server list? <a href="/host#directory" class="text-link"
 			>OpenLink Directory</a
-		> is on the About page.
+		> is on the Host page.
 		{#if REPO_PUBLIC}
 			Older versions and release notes are on
 			<a href={RELEASES_URL} class="text-link" target="_blank" rel="noopener">GitHub</a>.

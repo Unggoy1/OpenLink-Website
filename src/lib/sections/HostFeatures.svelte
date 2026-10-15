@@ -14,7 +14,7 @@
 		{
 			key: 'vote',
 			title: 'Playlist voting',
-			text: 'Players vote in the OpenLink app between up to 4 random playlist entries (never the one just played), when the first player joins and after every match. Set the vote length (default 30 s), the number of choices and the start delay (default 5 s).'
+			text: 'Players vote in the lobby, with OpenLink Launcher, between up to 4 random playlist entries (never the one just played), when the first player joins and after every match. Set the vote length (default 30 s), the number of choices and the start delay (default 5 s).'
 		},
 		{
 			key: 'auto_start',

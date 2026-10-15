@@ -7,9 +7,11 @@
 		release: Release | null;
 		/** Shows the "All releases on GitHub" link; off where a page lists several programs. */
 		allReleases?: boolean;
+		/** GitHub answered, but no release carries this program yet. */
+		unreleased?: boolean;
 	}
 
-	let { release, allReleases = true }: Props = $props();
+	let { release, allReleases = true, unreleased = false }: Props = $props();
 
 	// UTC so the server-rendered and hydrated dates always match.
 	const dateFormat = new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' });
@@ -27,6 +29,8 @@
 		{#if release.checksumsUrl}
 			<a href={release.checksumsUrl} class="tag" rel="noopener">SHA-256 checksums</a>
 		{/if}
+	{:else if unreleased}
+		<span class="tag">Coming in the next release</span>
 	{:else}
 		<span class="tag">Couldn’t load the latest release from GitHub</span>
 	{/if}

@@ -10,7 +10,7 @@ export interface DownloadFile {
 	size?: number;
 }
 
-export type ProgramId = 'app' | 'server' | 'directory';
+export type ProgramId = 'launcher' | 'server' | 'directory';
 
 export interface Program {
 	id: ProgramId;
@@ -19,10 +19,12 @@ export interface Program {
 	summary: string;
 	/**
 	 * The newest release that carries this program; its files come from it.
-	 * Programs are versioned separately: a server-only release has no app files.
+	 * Programs are versioned separately: a server-only release has no launcher files.
 	 * Null when GitHub couldn't be reached and nothing was cached.
 	 */
 	release: Release | null;
+	/** GitHub answered, but no release carries this program yet (release is null). */
+	unreleased: boolean;
 	files: DownloadFile[];
 }
 

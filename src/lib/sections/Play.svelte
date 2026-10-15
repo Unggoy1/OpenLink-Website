@@ -10,23 +10,23 @@
 	const steps: Step[] = [
 		{
 			title: 'Install Halo Infinite on Steam',
-			text: 'On the same game version as the server.'
+			text: 'Steam running and signed in. Close Halo if you started it from Steam.'
 		},
 		{
-			title: 'Download and open the OpenLink app',
-			text: 'Get it from <a href="#downloads" class="text-link">Downloads</a>. It tells you when a newer version is out.'
+			title: 'Unzip OpenLink Launcher into its own folder',
+			text: 'Get it from <a href="#downloads" class="text-link">Downloads</a>. <strong>Not into your Halo Infinite folder</strong>: files in the game folder can cause problems with anti-cheat. Desktop or Documents is fine.'
 		},
 		{
-			title: 'Click Join on a server',
-			text: 'The status bar goes contacting → ready → playing.'
+			title: 'Run openlink-launcher.exe',
+			text: 'It finds Halo in your Steam library, starts it and adds OpenLink. Its window closes by itself, or stays open and says what went wrong. <code>openlink-launcher.exe -create-shortcut</code> adds a Desktop shortcut.'
 		},
 		{
-			title: 'Pick the server in Halo Infinite',
-			text: 'Go to <strong>Custom Game → Create Match → Server</strong> and pick it by name.'
+			title: 'Join from the in-game browser',
+			text: 'Go to <strong>Play → Custom Game → OpenLink Servers</strong>, pick a server and press <strong>Join</strong>.'
 		},
 		{
-			title: 'Keep OpenLink open while you play',
-			text: 'Closing it disconnects you. On servers with voting, it chimes when a vote opens; alt-tab to it to pick the next match.'
+			title: 'Vote, play, leave',
+			text: 'Vote for the next match in the lobby: click a choice, press <strong>Alt+1</strong>–<strong>4</strong>, or hold <strong>View</strong> and press the D-pad. <strong>Back</strong> in the lobby asks before you leave the server.'
 		}
 	];
 
@@ -36,23 +36,23 @@
 			text: 'Only hosts need to open a port.'
 		},
 		{
-			title: 'Versions must match',
-			text: 'Servers on another game version are listed but can’t be joined.'
+			title: 'Normal Halo is unaffected',
+			text: 'Start Halo from Steam as usual for matchmaking: anti-cheat runs normally. With the launcher, official matchmaking is unavailable and the game shows OFFLINE.'
 		},
 		{
-			title: 'Keep the app updated',
-			text: 'Update when a new version ships; the app tells you.'
+			title: 'Stays up to date',
+			text: 'When a newer launcher is out, it offers the download page when it starts.'
 		},
 		{
-			title: 'Not showing up in game?',
-			text: 'Switch the app to <strong>LAN broadcast</strong> in Settings. It does this by itself when the server runs on your own PC.'
+			title: 'Hosting on the same PC?',
+			text: 'Works as is: the launcher notices a server on your PC and adjusts by itself.'
 		}
 	];
 </script>
 
 <Panel id="play" title="How to play">
 	{#snippet intro()}
-		No port forwarding and no config files: just the Steam version of the game and the OpenLink app.
+		No port forwarding and no setup: Halo Infinite on Steam and OpenLink Launcher.
 	{/snippet}
 
 	<div class="layout">

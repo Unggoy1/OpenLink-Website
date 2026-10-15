@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import Logo from './Logo.svelte';
 	import Icon from './Icon.svelte';
-	import { NAV_LINKS, type NavLink } from '#lib/site.ts';
+	import { NAV_LINKS, REPO_PUBLIC, REPO_URL, type NavLink } from '#lib/site.ts';
 
 	const desktopLinks = NAV_LINKS.filter((link) => link.desktop);
 	const mobileLinks = NAV_LINKS.filter((link) => link.mobileIcon);
@@ -54,10 +54,24 @@
 			{/each}
 		</nav>
 
-		<a href="/#downloads" class="btn small download">
-			<Icon name="download" />
-			Download
-		</a>
+		<div class="actions">
+			{#if REPO_PUBLIC}
+				<a
+					href={REPO_URL}
+					class="github"
+					target="_blank"
+					rel="noopener"
+					aria-label="Source code on GitHub"
+					title="Source code on GitHub"
+				>
+					<Icon name="github" size={24} />
+				</a>
+			{/if}
+			<a href="/#downloads" class="btn small download">
+				<Icon name="download" />
+				Download
+			</a>
+		</div>
 	</div>
 </header>
 
@@ -132,9 +146,25 @@
 		font-weight: 700;
 	}
 
-	.download {
+	.actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
 		flex-shrink: 0;
 		margin-left: auto;
+	}
+
+	.github {
+		display: flex;
+		padding: 10px;
+		border-radius: 12px;
+		color: var(--sidebar-color);
+		transition: all 0.2s ease-in-out;
+	}
+
+	.github:hover {
+		background-color: var(--button-bg);
+		color: var(--button-color);
 	}
 
 	@media screen and (max-width: 1040px) {

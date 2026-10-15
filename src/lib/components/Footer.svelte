@@ -10,10 +10,10 @@
 
 	let { programs }: Props = $props();
 
-	// The app and the server are versioned separately; show both.
+	// The launcher and the server are versioned separately; show both.
 	const versions = $derived(
 		[
-			{ id: "app", label: "App" },
+			{ id: "launcher", label: "Launcher" },
 			{ id: "server", label: "Server" },
 		].flatMap(({ id, label }) => {
 			const release = programs.find((p) => p.id === id)?.release;
@@ -32,7 +32,8 @@
 			<!-- </a> -->
 			<p class="disclaimer">
 				Unofficial fan project. Not affiliated with or endorsed by Microsoft,
-				Xbox or Halo Studios. Halo is a trademark of Microsoft.
+				Xbox or Halo Studios. Halo is a trademark of Microsoft. OpenLink is
+				open source under the GNU AGPL v3.
 			</p>
 		</div>
 

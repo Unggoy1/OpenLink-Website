@@ -3,24 +3,24 @@
 
 	const points: { icon: IconName; title: string; text: string }[] = [
 		{
-			icon: 'gamepad',
-			title: 'Players’ games are untouched',
-			text: 'The game’s own LAN server mode. No modded files, no memory editing, nothing near anti-cheat.'
+			icon: 'list',
+			title: 'In-game server browser',
+			text: 'Find community servers under Play → Custom Game, with what they are playing and how many players are on, and join in one press.'
 		},
 		{
-			icon: 'check',
-			title: 'You sign in normally',
-			text: 'OpenLink never sees your Xbox or Microsoft credentials. No accounts, no sign-in data.'
+			icon: 'gamepad',
+			title: 'Vote for the next match',
+			text: 'Pick the next map and mode right in the lobby, with mouse, keyboard or controller.'
 		},
 		{
 			icon: 'server',
-			title: 'Traffic passes straight through',
-			text: 'Game traffic is encrypted by the game and forwarded unchanged. OpenLink never reads it.'
+			title: 'Dedicated community servers',
+			text: 'Hosts run their own playlists. The server runs the lobby, so matches keep going as players come and go.'
 		}
 	];
 </script>
 
-<section class="safety" id="safety" aria-label="Safe by design">
+<section class="safety" id="features" aria-label="OpenLink features">
 	{#each points as point (point.title)}
 		<div class="point">
 			<Icon name={point.icon} size={22} class="point-icon" />

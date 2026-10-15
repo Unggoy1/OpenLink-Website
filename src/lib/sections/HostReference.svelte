@@ -23,19 +23,19 @@
 	const caveats = [
 		{
 			title: 'It modifies your own server process',
-			text: 'To control maps and modes, the DLL is loaded into the server you host. Never into players’ games, never near anti-cheat. You run it at your own risk with respect to the game’s terms of service.'
+			text: 'To control maps and modes, the DLL is loaded into the server you host, never near anti-cheat. You run it at your own risk with respect to the game’s terms of service.'
 		},
 		{
-			title: 'One game build at a time',
-			text: 'Each release supports one Halo Infinite build. After a Halo update, OpenLink Server refuses to start (and says why in its log) until an update for the new build is out.'
+			title: 'One game build',
+			text: 'OpenLink supports the final PC build of Halo Infinite. OpenLink Server checks the build before it starts, and its log says why if it won’t.'
 		},
 		{
 			title: 'Opening a port is your call',
 			text: 'Hosting exposes a port on your network to the internet. OpenLink is provided as is, without warranty.'
 		},
 		{
-			title: 'Players stay unmodified',
-			text: 'Their games aren’t touched, and Microsoft sign-in stays in the game.'
+			title: 'Players sign in normally',
+			text: 'Microsoft sign-in stays in the game. Players join with OpenLink Launcher, which changes their own game in memory only, on their own PC.'
 		}
 	];
 
@@ -116,7 +116,7 @@
 				<code>selection</code>: <code>"shuffle_bag"</code> (default) or <code>"sequential"</code>,
 				for rotation without voting.
 			</li>
-			<li>No thumbnail field: the app finds each map’s image from its IDs.</li>
+			<li>No thumbnail field: the launcher finds each map’s image from its IDs.</li>
 		</ul>
 	</div>
 

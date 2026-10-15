@@ -16,9 +16,9 @@ bun run check
 
 | Route | Content | Sections |
 |---|---|---|
-| `/` | For players: downloads, how to play, the app and voting, FAQ | `src/routes/+page.svelte` |
-| `/host` | Hosting guide: setup steps, options, admin commands, caveats, playlist format | `src/routes/host/+page.svelte` |
-| `/about` | How it works, status, source, running your own directory | `src/routes/about/+page.svelte` |
+| `/` | For players: features, downloads, how to play, screenshots, FAQ | `src/routes/+page.svelte` |
+| `/host` | Hosting guide: setup steps, options, admin commands, caveats, playlist format, running your own directory | `src/routes/host/+page.svelte` |
+| `/about` | Redirects to `/host#directory` (the old "How it works" page was retired) | `src/routes/about/+page.server.ts` |
 
 Sections live in `src/lib/sections/`; nav links are `NAV_LINKS` in `src/lib/site.ts`.
 
@@ -26,7 +26,7 @@ Sections live in `src/lib/sections/`; nav links are `NAV_LINKS` in `src/lib/site
 
 Download links, file sizes and versions come from the published releases of [Unggoy1/OpenLink](https://github.com/Unggoy1/OpenLink/releases), pre-releases included. Publishing a release is all it takes; the site picks it up within a few minutes.
 
-- The programs share one version series, but a release carries only the programs that changed. Each program uses the newest release that has its main file (its first file in `src/lib/server/downloads.ts`), so the app and the server can show different versions. The footer shows both.
+- The programs share one version series, but a release carries only the programs that changed. Each program uses the newest release that has its main file (its first file in `src/lib/server/downloads.ts`), so the launcher and the server can show different versions; a program no release carries yet shows "Coming in the next release". The footer shows both.
 - Buttons are matched to release files by name (`src/lib/server/downloads.ts`), so they must match the names the release workflow publishes. A file missing from the program's release shows "Not available yet".
 - `src/lib/server/releases.ts` asks the GitHub API and keeps the answer in memory for 5 minutes, re-checking with an ETag. Pages also send `s-maxage=300, stale-while-revalidate=3600`, so Vercel's CDN serves most visits without asking GitHub at all.
 - If GitHub can't be reached, the last good answer is reused; with none, the page says it couldn't load the release and links to the releases page.
